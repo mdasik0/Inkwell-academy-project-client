@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* fonts */
+
+.logo_font{
+    font-family: 'Slackside One', cursive;
+}
