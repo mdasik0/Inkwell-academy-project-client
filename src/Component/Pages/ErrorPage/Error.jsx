@@ -15,7 +15,7 @@ const Error = () => {
         src="https://cdn.dribbble.com/users/469578/screenshots/2597126/404-drib23.gif"
         alt=""
       />
-      <div className="text-gray-700 absolute bottom-1 text-sm font-semibold">{error.data}</div>
+      <div className="text-gray-500 absolute bottom-24 text-sm font-semibold">{error.data}</div>
       <Link to={'/'} className="my-3">
         <button className="btn btn-circle bg-gray-600 text-white hover:text-black">
           <FaHome></FaHome>

@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+// TODO: Make Avater conditional on user 
+// TODO: Make signin and signout condional on user 
+// TODO: make logout conditional 
+// TODO: make dashboard conditional 
 
 const Navbar = () => {
   const Navbar = (
@@ -22,13 +26,13 @@ const Navbar = () => {
       </li>
       
       <li>
-        <Link>
+        <Link to={'/signIn'}>
             sign in
         </Link>
       </li>
       
       <li>
-        <Link>
+        <Link to={'/signUp'}>
             sign up
         </Link>
       </li>
