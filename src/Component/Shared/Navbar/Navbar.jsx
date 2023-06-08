@@ -67,7 +67,7 @@ const Navbar = () => {
         {/* Logo Here */}
         <div className="flex items-center justify-center gap-2">
           <img className="h-16 md:block hidden" src="/favicon.png" alt="" />
-          <h4 className="text-2xl logo_font">ArtVenture</h4>
+          <h4 className="text-2xl logo_font">ArtBuddy</h4>
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">

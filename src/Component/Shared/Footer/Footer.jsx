@@ -8,7 +8,7 @@ const Footer = () => {
           <div>
             <img className="w-20 h-20 object-cover" src="/favicon.png" alt="" />
             <p>
-              <span className="logo_font text-lg">ArtVenture</span> Ltd.
+              <span className="logo_font text-lg">ArtBuddy</span> Ltd.
               <br />
               Address: 19/B, Road 3, Dhanmondi, <br />
               Dhaka-1205, Bangladesh.
@@ -38,7 +38,7 @@ const Footer = () => {
         </div>
       </footer>
       <div className="text-center text-xs py-4   bg-base-200 text-gray-500">
-        <p>Copyright © 2023 - All right reserved by <span className="logo_font text-lg">ArtVenture</span> Ltd.</p>
+        <p>Copyright © 2023 - All right reserved by <span className="logo_font text-lg">ArtBuddy</span> Ltd.</p>
       </div>
     </>
   );
