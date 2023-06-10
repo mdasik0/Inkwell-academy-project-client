@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Title from "../../../../Shared/Title/Title";
 import { AuthContext } from "../../../../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const AddaClass = () => {
     const {user} = useContext(AuthContext)
@@ -14,12 +15,26 @@ const AddaClass = () => {
         const classImg = form.classImg.value;
         const seats = parseInt(form.seats.value);
         const classObject = {className,classImg,name,email,seats,price,status: 'pending'}
-        console.log(classObject)
-        fetch(``)
+        fetch(`http://localhost:5000/addClass`,{
+            method:'POST',
+            headers:{
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(classObject)
+        })
         .then(res => res.json())
-        .then(() => {
-            alert('class added')
-            
+        .then((data) => {
+            if(data.insertedId){
+
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Class has Been Added Succesfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                form.reset()
+            }
         })
     }
   return (
@@ -34,6 +49,7 @@ const AddaClass = () => {
           </label>
           <label className="rounded">
             <input
+            required
               type="text" 
               name='className'
               placeholder="Class Name here"
@@ -47,6 +63,7 @@ const AddaClass = () => {
           </label>
           <label className="rounded">
             <input
+            required
               type="text" 
               name='classImg'
               placeholder="Class Image here"
@@ -90,6 +107,7 @@ const AddaClass = () => {
           </label>
           <label className="rounded">
             <input
+            required
               type="text" 
               name='seats'
               placeholder="Seats available for class here"
@@ -103,6 +121,7 @@ const AddaClass = () => {
           </label>
           <label className="rounded">
             <input
+            required
               type="text" 
               name='price'
               placeholder="Enroll Price here"
