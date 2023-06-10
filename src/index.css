@@ -4,6 +4,27 @@
 
 /* fonts */
 
+*{
+    font-family: 'Open Sans', sans-serif;
+}
 .logo_font{
-    font-family: 'Slackside One', cursive;
+    font-family: 'Satisfy', cursive;
+}
+a.active{
+    color: #006aff;
+    border-bottom: 4px solid #006aff;
+    border-radius: 0;
+    background-color: transparent;
+}
+.drawer-side a.active{
+    color: black;
+    border: none;
+    
+    background-color: white;
+    margin-right: 0px;
+    border-top-left-radius: 19px;
+    border-bottom-left-radius: 19px;
+}
+.homepage{
+    font-family: 'Dancing Script', cursive;
 }

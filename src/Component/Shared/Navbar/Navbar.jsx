@@ -1,41 +1,78 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 // TODO: Make Avater conditional on user 
 // TODO: Make signin and signout condional on user 
 // TODO: make logout conditional 
 // TODO: make dashboard conditional 
 
 const Navbar = () => {
+
+  const {user, logOut} = useContext(AuthContext)
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        Swal.fire(
+          "LogOut Successful",
+          "You have logged out of your account successfully!",
+          "success"
+        );
+      })
+      .catch((error) => console.error(error));
+  };
+
   const Navbar = (
     <>
       <li>
-        <Link>
+        <NavLink to={'/'}>
             home
-        </Link>
+        </NavLink>
       </li>
       
       <li>
-        <Link>
+        <NavLink to={'/classes'}>
             classes
-        </Link>
+        </NavLink>
       </li>
       
       <li>
-        <Link>
+        <NavLink to={'/instructors'}>
             instructors
-        </Link>
+        </NavLink>
       </li>
       
-      <li>
-        <Link to={'/signIn'}>
+      {
+        user ? 
+        <>
+        <li>
+          <NavLink to={'/dashBoard'}>
+            Dashboard
+          </NavLink>
+        </li>
+        <li onClick={handleLogout}>
+          <Link>
+              Log Out
+          </Link>
+        </li>
+        </>
+        
+        :
+        <>
+        <li>
+        <NavLink to={'/signIn'}>
             sign in
-        </Link>
+        </NavLink>
       </li>
       
       <li>
-        <Link to={'/signUp'}>
+        <NavLink to={'/signUp'}>
             sign up
-        </Link>
+        </NavLink>
       </li>
+        </>
+      }
       
     </>
   );
@@ -60,8 +97,9 @@ const Navbar = () => {
             </svg>
           </label>
           <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content uppercase mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            tabIndex={1}
+            
+            className="menu menu-sm static z-50 dropdown-content uppercase mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             {/* navbar here */}
             {Navbar}
@@ -71,21 +109,27 @@ const Navbar = () => {
         {/* Logo Here */}
         <div className="flex items-center justify-center gap-2">
           <img className="h-16 md:block hidden" src="/favicon.png" alt="" />
-          <h4 className="text-2xl logo_font">ArtBuddy</h4>
+          <h4 className="text-2xl md:flex-none flex items-baseline  logo_font">Inkwell <span className="text-xs">.Academy</span></h4>
         </div>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className={`${user? 'navbar-center' : 'navbar-end'} hidden lg:flex`}>
         <ul className="menu uppercase font-semibold menu-horizontal px-1">{/* navbar here */}
         {Navbar}
         </ul>
       </div>
-      <div className="navbar-end">
+      {
+        user 
+        ? <div className="navbar-end">
         <div className="avatar online">
           <div className="md:w-14 w-12  rounded-full">
-            <img src="https://www.shareicon.net/data/512x512/2016/09/01/822711_user_512x512.png" />
+            <img src={user?.photoURL} />
           </div>
         </div>
-      </div>
+      </div> 
+      :
+      <></>
+      }
+      
     </div>
   );
 };

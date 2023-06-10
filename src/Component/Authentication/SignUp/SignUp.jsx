@@ -19,8 +19,8 @@ const SignUp = () => {
   // ================= States ================
   const { createUser, updateUser } = useContext(AuthContext);
   const [show, setShow] = useState(false);
-  const [error, setError] = useState('')
-  console.log(error.message)
+  const [error, setError] = useState("");
+  console.log(error.message);
   const navigate = useNavigate();
 
   const {
@@ -47,7 +47,12 @@ const SignUp = () => {
 
         updateUser(name, photoUrl)
           .then(() => {
-            const SavedUser = { name: name, email: email };
+            const SavedUser = {
+              name: name,
+              email: email,
+              photo: photoUrl,
+              role: "user",
+            };
             fetch(`http://localhost:5000/users`, {
               method: "POST",
               headers: {
@@ -150,7 +155,7 @@ const SignUp = () => {
             />
           </label>
         </div>
-            {/* email validation */}
+        {/* email validation */}
         {errors.email && (
           <span className="text-red-500 text-xs font-semibold flex items-center gap-1 mt-2">
             {" "}
@@ -211,14 +216,16 @@ const SignUp = () => {
         {errors.password?.type === "minLength" && (
           <span className="text-red-500 text-xs font-semibold flex items-center gap-1 mt-2">
             {" "}
-            <FaExclamationCircle></FaExclamationCircle> Password is too short, <br />
+            <FaExclamationCircle></FaExclamationCircle> Password is too short,{" "}
+            <br />
             Atleast give 6 characters
           </span>
         )}
         {errors.password?.type === "maxLength" && (
           <span className="text-red-500 text-xs font-semibold flex items-center gap-1 mt-2">
             {" "}
-            <FaExclamationCircle></FaExclamationCircle> Password is too Long, <br />
+            <FaExclamationCircle></FaExclamationCircle> Password is too Long,{" "}
+            <br />
             give less then 20 characters
           </span>
         )}
@@ -226,7 +233,7 @@ const SignUp = () => {
           <span className="text-red-500 text-xs font-semibold flex items-center gap-1 mt-2">
             {" "}
             <FaExclamationCircle></FaExclamationCircle> Make sure your Password
-            includes: <br />   1 Capital letter, 1 Special character
+            includes: <br /> 1 Capital letter, 1 Special character
           </span>
         )}
         {/* error ends here */}
@@ -268,16 +275,21 @@ const SignUp = () => {
           )}
         </div>
         {errors.confirmPassword && (
-          <span className="text-red-500 text-sm mt-2 flex items-center font-semibold"> <FaExclamationCircle></FaExclamationCircle> {errors.confirmPassword.message}</span>
+          <span className="text-red-500 text-sm mt-2 flex items-center font-semibold">
+            {" "}
+            <FaExclamationCircle></FaExclamationCircle>{" "}
+            {errors.confirmPassword.message}
+          </span>
         )}
         <div>
-          <h4 className="text-xs font-semibold text-red-500">{error.message}</h4>
+          <h4 className="text-xs font-semibold text-red-500">
+            {error.message}
+          </h4>
         </div>
-        
 
         {/* Sign Up btn */}
 
-        <div className="my-6">
+        <div className="md:w-2/3  ml-3 mt-4 md:ml-0 w-full">
           <input
             className="uppercase text-sm btn bg-blue-600 text-white hover:bg-blue-400"
             type="submit"
