@@ -17,8 +17,8 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const DashBoard = () => {
   const { user } = useContext(AuthContext);
-  const IsAdmin = false;
-  const IsInstructor = true;
+  const IsAdmin = true;
+  const IsInstructor = false;
   const cart = ["cart:1", "cart:2", "cart:3"];
   return (
     <div>
@@ -28,15 +28,15 @@ const DashBoard = () => {
           <label
             htmlFor="my-drawer-2"
             className="btn ml-auto btn-primary drawer-button lg:hidden"
-          >
+            >
             Open drawer
           </label>
-          <Outlet></Outlet>
+            <Outlet></Outlet>
         </div>
         <div className="drawer-side text-slate-400 md:w-0 w-2/3 bg-slate-900">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 
-          <ul className="menu uppercase h-full text-sm font-semibold p-4 pr-0 md:w-80 w-full">
+          <ul className="menu h-full text-sm font-semibold p-4 pr-0 md:w-80 w-full">
           
             <div className="w-full my mx-auto">
               <div className="flex items-end my-4 justify-center gap-2">

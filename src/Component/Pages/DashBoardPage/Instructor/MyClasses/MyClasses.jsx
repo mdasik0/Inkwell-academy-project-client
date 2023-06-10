@@ -1,10 +1,11 @@
 
+
 const MyClasses = () => {
-    return (
-        <div>
-            My class
-        </div>
-    );
+  return (
+    <div>
+        
+    </div>
+  );
 };
 
 export default MyClasses;
