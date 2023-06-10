@@ -1,16 +1,15 @@
 import { useContext } from "react";
 import {
   FaBars,
-  FaBook,
-  FaCalendarAlt,
+  FaBusinessTime,
+  FaFolderPlus,
   FaHome,
-  FaListUl,
   FaReceipt,
+  FaRegCopy,
   FaShoppingBag,
   FaShoppingCart,
   FaSignOutAlt,
-  FaUsers,
-  FaUtensils,
+  FaUserEdit,
   FaWallet,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
@@ -19,7 +18,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 const DashBoard = () => {
   const { user } = useContext(AuthContext);
   const IsAdmin = false;
-  const IsInstructor = false;
+  const IsInstructor = true;
   const cart = ["cart:1", "cart:2", "cart:3"];
   return (
     <div>
@@ -70,58 +69,31 @@ const DashBoard = () => {
               //  Admin DashBoard
               <>
                 <li>
-                  <NavLink to="/dashboard">
-                    <FaHome></FaHome> Admin Home
+                  <NavLink to="manageCls">
+                    <FaBusinessTime></FaBusinessTime> Manage Classes
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/reservations">
-                    <FaUtensils></FaUtensils> Add Itmes
+                  <NavLink to="manageUsers">
+                    <FaUserEdit></FaUserEdit> Manage Users
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink to="/dashboard/history">
-                    <FaListUl></FaListUl> Manage Items
-                  </NavLink>
-                </li>
-
-                <li>
-                  <NavLink to="/dashboard/history">
-                    <FaBook></FaBook> Manage Bookings
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="allUsers">
-                    <FaUsers></FaUsers> All Users
-                  </NavLink>
-                </li>
+                
               </>
             ) : IsInstructor ? (
               //  instructor DashBoard
               <>
                 <li>
-                  <NavLink to="/dashboard">
-                    <FaHome></FaHome> Instructor Home
+                  <NavLink to="addAClass">
+                    <FaFolderPlus></FaFolderPlus> Add a Class
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/reservations">
-                    <FaCalendarAlt></FaCalendarAlt> Reservations
+                  <NavLink to="myClass">
+                    <FaRegCopy></FaRegCopy> My Classes
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink to="/dashboard/history">
-                    <FaWallet></FaWallet> Payment History
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="myCart">
-                    <FaShoppingCart></FaShoppingCart> My Cart
-                    <span className="bg-red-500 px-2 rounded-full text-sm text-white">
-                      +{cart?.length || 0}
-                    </span>
-                  </NavLink>
-                </li>
+               
               </>
             ) : (
               //   user DashBoard

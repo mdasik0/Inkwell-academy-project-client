@@ -10,6 +10,10 @@ import DashBoard from "../../Layout/Dashboard";
 import MySelectedClasses from "../../Component/Pages/DashBoardPage/MySelectedClasses/MySelectedClasses";
 import MyEnrolledClass from "../../Component/Pages/DashBoardPage/MyEnrolledClass/MyEnrolledClass";
 import PaymentHistory from "../../Component/Pages/DashBoardPage/PaymentHistroy/PaymentHistory";
+import AddaClass from "../../Component/Pages/DashBoardPage/Instructor/AddaClass/AddaClass";
+import MyClasses from "../../Component/Pages/DashBoardPage/Instructor/MyClasses/MyClasses";
+import ManageClasses from "../../Component/Pages/DashBoardPage/Instructor/Admin/ManageClasses/ManageClasses";
+import ManageUsers from "../../Component/Pages/DashBoardPage/Instructor/Admin/ManageUsers/ManageUsers";
 
 const router = createBrowserRouter([
     {
@@ -54,6 +58,22 @@ const router = createBrowserRouter([
         {
           path: 'paymentHistory',
           element: <PaymentHistory></PaymentHistory>
+        },
+        {
+          path: 'addAClass',
+          element: <AddaClass></AddaClass>
+        },
+        {
+          path: 'myClass',
+          element: <MyClasses></MyClasses>
+        },
+        {
+          path: 'manageCls',
+          element: <ManageClasses></ManageClasses>
+        },
+        {
+          path: 'manageUsers',
+          element: <ManageUsers></ManageUsers>
         },
       ]
     }
