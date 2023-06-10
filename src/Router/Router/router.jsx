@@ -7,6 +7,9 @@ import SignIn from "../../Component/Authentication/SignIn/SignIn";
 import Instructors from "../../Component/Pages/Instructors/Instructors";
 import Classes from "../../Component/Pages/Classes/Classes";
 import DashBoard from "../../Layout/Dashboard";
+import MySelectedClasses from "../../Component/Pages/DashBoardPage/MySelectedClasses/MySelectedClasses";
+import MyEnrolledClass from "../../Component/Pages/DashBoardPage/MyEnrolledClass/MyEnrolledClass";
+import PaymentHistory from "../../Component/Pages/DashBoardPage/PaymentHistroy/PaymentHistory";
 
 const router = createBrowserRouter([
     {
@@ -39,6 +42,20 @@ const router = createBrowserRouter([
     {
       path:'dashBoard',
       element:<DashBoard></DashBoard>,
+      children:[
+        {
+          path: 'selectedClasses',
+          element: <MySelectedClasses></MySelectedClasses>
+        },
+        {
+          path: 'enrolledClasses',
+          element: <MyEnrolledClass></MyEnrolledClass>
+        },
+        {
+          path: 'paymentHistory',
+          element: <PaymentHistory></PaymentHistory>
+        },
+      ]
     }
   ]);
 
