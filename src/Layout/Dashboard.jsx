@@ -17,8 +17,8 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const DashBoard = () => {
   const { user } = useContext(AuthContext);
-  const IsAdmin = true;
-  const IsInstructor = false;
+  const IsAdmin = false;
+  const IsInstructor = true;
   const cart = ["cart:1", "cart:2", "cart:3"];
   return (
     <div>
