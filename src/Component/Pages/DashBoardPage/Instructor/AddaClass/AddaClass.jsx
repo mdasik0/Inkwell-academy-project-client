@@ -14,7 +14,7 @@ const AddaClass = () => {
         const className = form.className.value;
         const classImg = form.classImg.value;
         const seats = parseInt(form.seats.value);
-        const classObject = {className,classImg,name,email,seats,price,status: 'pending'}
+        const classObject = {className,classImg,name,email,seats,price,status: 'denied'}
         fetch(`http://localhost:5000/addClass`,{
             method:'POST',
             headers:{
