@@ -59,14 +59,12 @@ const MyClasses = () => {
               </div>
 
               <div className="flex items-center justify-between">
-              {item.status === "pending" || item.status === "approved" ? (
-                <></>
-              ) : (
+              
                 <button onClick={() => handleButtonClick(item?.review || 'No review Found'
                 )} className="px-3 py-1 border-2 text-red-500 border-red-500 rounded-lg text-sm font-bold mt-2 hover:bg-red-400 hover:text-white duration-300">
                   FeedBack
                 </button>
-              )}
+              
               <button className="px-3 py-1 border-2 border-black rounded-lg text-sm font-bold mt-2 hover:bg-slate-900 hover:text-white duration-300">Update</button>
               </div>
             </div>

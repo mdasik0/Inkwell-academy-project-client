@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext} from "react";
 import Title from "../../../../Shared/Title/Title";
 import { AuthContext } from "../../../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
@@ -6,27 +6,27 @@ import Swal from "sweetalert2";
 const AddaClass = () => {
     const {user} = useContext(AuthContext)
     const handleSubmit = (event) => {
-        event.preventDefault()
-        const form = event.target;
-        const email = form.email.value;
-        const name = form.name.value;
-        const price = form.price.value;
-        const className = form.className.value;
-        const classImg = form.classImg.value;
-        const seats = parseInt(form.seats.value);
-        const classObject = {className,classImg,name,email,seats,price,status: 'denied'}
-        fetch(`http://localhost:5000/addClass`,{
-            method:'POST',
-            headers:{
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(classObject)
-        })
-        .then(res => res.json())
-        .then((data) => {
-            if(data.insertedId){
-
-                Swal.fire({
+      event.preventDefault()
+      const form = event.target;
+      const email = form.email.value;
+      const name = form.name.value;
+      const price = form.price.value;
+      const className = form.className.value;
+      const classImg = form.classImg.value;
+      const seats = parseInt(form.seats.value);
+      const classObject = {className,classImg,name, email,seats,price,status: 'denied'}
+      fetch(`http://localhost:5000/addClass`,{
+        method:'POST',
+        headers:{
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(classObject)
+      })
+      .then(res => res.json())
+      .then((data) => {
+        if(data.insertedId){
+          
+          Swal.fire({
                     position: 'top-end',
                     icon: 'success',
                     title: 'Class has Been Added Succesfully',

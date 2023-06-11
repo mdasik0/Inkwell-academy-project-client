@@ -13,7 +13,7 @@ const PopularClasses = () => {
       ></Title>
       <div className="gap-10 grid md:grid-cols-3 grid-cols-1">
         {/* card  */}
-        <div className="h-[500px] rounded-xl my-6 md:my-10 shadow-xl w-full md:w-[350px] bg-white">
+        <div className="h-[450px] rounded-xl my-6 md:my-10 shadow-xl w-full md:w-[350px] bg-white">
           <div className="h-[250px] relative">
             <img
               className=" w-full h-full object-cover p-3 rounded-[25px] "
@@ -24,7 +24,7 @@ const PopularClasses = () => {
               <FaStar></FaStar> Top Rated
             </h4>
           </div>
-          <div className="h-[230px] flex flex-col justify-between px-4 w-full">
+          <div className="h-[180px] flex flex-col justify-between px-4 w-full">
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-xl font-semibold">
@@ -34,13 +34,7 @@ const PopularClasses = () => {
                   instructor name
                 </h4>
               </div>
-              <div className="h-[65px] w-[65px]">
-                <img
-                  className="h-full w-full object-cover rounded-full"
-                  src="https://i.ibb.co/4jz4ZBP/bauman.jpg"
-                  alt=""
-                />
-              </div>
+              
             </div>
 
             <div>
