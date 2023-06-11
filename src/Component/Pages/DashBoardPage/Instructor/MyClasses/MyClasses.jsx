@@ -30,7 +30,7 @@ const MyClasses = () => {
         {classes.map((item) => (
           <div
             key={item._id}
-            className="h-[480px] rounded-xl w-[320px] bg-slate-200"
+            className="h-[480px] rounded-xl md:w-[320px] mx-3 bg-slate-200"
           >
             <div className="h-1/2 rounded-xl bg-yellow-100">
               <img
@@ -58,14 +58,17 @@ const MyClasses = () => {
                 </h4>
               </div>
 
+              <div className="flex items-center justify-between">
               {item.status === "pending" || item.status === "approved" ? (
                 <></>
               ) : (
                 <button onClick={() => handleButtonClick(item?.review || 'No review Found'
-                )} className="px-3 py-1 border-2 border-black rounded-lg text-sm font-bold mt-2 hover:bg-slate-900 hover:text-white duration-300">
+                )} className="px-3 py-1 border-2 text-red-500 border-red-500 rounded-lg text-sm font-bold mt-2 hover:bg-red-400 hover:text-white duration-300">
                   FeedBack
                 </button>
               )}
+              <button className="px-3 py-1 border-2 border-black rounded-lg text-sm font-bold mt-2 hover:bg-slate-900 hover:text-white duration-300">Update</button>
+              </div>
             </div>
           </div>
         ))}
