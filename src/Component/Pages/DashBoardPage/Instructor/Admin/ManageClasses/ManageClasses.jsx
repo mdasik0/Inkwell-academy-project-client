@@ -126,6 +126,8 @@ const ManageClasses = () => {
                 >
                   Deny
                 </button>
+
+                {/* TODO: add a review function where if review is clicked a modal will open and with input text and submit and patch once again */}
                 <button className="px-4 py-2 text-blue-500 border-2 border-blue-500 hover:bg-blue-500 hover:text-white duration-500 text-sm font-semibold w-full">
                   Review
                 </button>
