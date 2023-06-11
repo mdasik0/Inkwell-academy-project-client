@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import Title from "../../../../../Shared/Title/Title";
+// TODO: Use swal to promote admin and instructors
 
 const ManageUsers = () => {
   const [disableAdmin, setDisableAdmin] = useState([]);
