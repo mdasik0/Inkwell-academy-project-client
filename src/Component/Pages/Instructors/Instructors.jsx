@@ -1,6 +1,18 @@
+import axios from "axios";
 import Title from "../../Shared/Title/Title";
+import { useState } from "react";
 
 const Instructors = () => {
+
+  const[instructors,setInstructors] = useState([])
+
+
+
+
+  axios.get(`http://localhost:5000/instructors`)
+  .then(data => {
+    setInstructors(data.data)
+  })
   return (
     <div className=" md:w-[1280px] mx-auto w-full bg-purple-100 rounded-xl ">
       <Title
@@ -11,17 +23,18 @@ const Instructors = () => {
       ></Title>
       <div className="grid md:grid-cols-4 grid-cols-1 gap-14 md:p-10 p-3">
         {/* card start */}
-        <div className="md:w-[250px] w-full shadow-xl bg-blue-500 p-4 rounded-xl h-[300px]">
+        {
+          instructors.map(instructor => <div key={instructor._id} className="md:w-[250px] w-full shadow-xl bg-blue-500 p-4 rounded-xl h-[300px]">
           <div>
             <img
               className="rounded-full h-24 w-24 object-cover border-white border-[10px]"
-              src="https://www.northwordnews.com/uploads/9/0/1/9/9019010/stephen-bauman-drawing_orig.jpg"
+              src={instructor.photo}
               alt=""
               />
           </div>
           <div className="my-6 text-start">
-            <h1 className="font-semibold text-white">Stephen Bauman</h1>
-            <h3 className="text-xs font-semibold text-slate-200 mt-2">Email: bauman@gmail.com</h3>
+            <h1 className="font-semibold text-white">{instructor.name}</h1>
+            <h3 className="text-xs font-semibold text-slate-200 mt-2">Email: {instructor.email}</h3>
             <h5 className="text-xs mt-2 font-semibold text-slate-200">
               {" "}
               Expreience: Teaching for 5 years
@@ -31,7 +44,8 @@ const Instructors = () => {
             </button>
           </div>
       
-        </div>
+        </div>)
+        }
       {/* card start */}
       </div>
     </div>

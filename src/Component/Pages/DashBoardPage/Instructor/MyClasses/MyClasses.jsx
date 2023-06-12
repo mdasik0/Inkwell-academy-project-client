@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import Title from "../../../../Shared/Title/Title";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../../../Provider/AuthProvider";
 
 const MyClasses = () => {
+  const {user} = useContext(AuthContext)
   const { data: classes = [] } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/classes", {
+    const res = await fetch(`http://localhost:5000/myClasses/${user?.email}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access-token")}`,
       },

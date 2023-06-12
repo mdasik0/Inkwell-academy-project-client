@@ -29,7 +29,8 @@ const Classes = () => {
       const selectedClass = {
         className: item.className,
         classImg: item.classImg,
-        email: item.email,
+        instructorEmail: item.email,
+        email: user?.email,
         name: item.name,
         price: item.price,
         seats: item.seats,

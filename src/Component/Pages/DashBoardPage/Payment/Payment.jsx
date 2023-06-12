@@ -14,18 +14,21 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const Payment = () => {
   const [loading, setLoading] = useState(true);
   const [price, setPrice] = useState(null);
+  const [data, setData] = useState([]);
 
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/selectedClass/${id}`)
+    fetch(`http://localhost:5000/paymentToClass/${id}`)
       .then((res) => res.json())
       .then((data) => {
+        setData(data)
         setPrice(data.price);
         setLoading(false);
       });
   }, []);
 
+  console.log(data)
   return (
     <div>
       <Title topHeader={"Payment"} bottomTitle={"Please proceed to payment"}></Title>
@@ -35,7 +38,7 @@ const Payment = () => {
         ) : (
           price !== null && (
             <Elements stripe={stripePromise}>
-              <CheckoutForm price={price}></CheckoutForm>
+              <CheckoutForm data={data} price={price}></CheckoutForm>
             </Elements>
           )
         )}

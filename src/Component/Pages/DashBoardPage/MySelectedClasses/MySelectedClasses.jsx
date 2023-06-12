@@ -2,16 +2,17 @@ import { FaMoneyCheckAlt, FaRegTrashAlt } from "react-icons/fa";
 import Title from "../../../Shared/Title/Title";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { AuthContext } from "../../../../Provider/AuthProvider";
 
 const MySelectedClasses = () => {
   // selectedClass
   const [datas, setData] = useState([]);
-  const axiosSecure = useAxiosSecure();
-
+  const {user} = useContext(AuthContext)
+  console.log(user.email)
   useEffect(() => {
-    axiosSecure.get(`/selectedClass`).then((data) => setData(data?.data));
+    axios.get(`http://localhost:5000/selectedClass/${user?.email}`).then((data) => setData(data?.data));
   }, []);
 
   // handle dElete data

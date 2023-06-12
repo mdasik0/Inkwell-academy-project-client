@@ -2,7 +2,25 @@ import { Link } from "react-router-dom";
 import Title from "../../../Shared/Title/Title";
 
 import { FaStar, FaRegUser, FaRegFileVideo, FaRegClock } from "react-icons/fa";
+import { useState } from "react";
+import axios from "axios";
 const PopularClasses = () => {
+
+
+  //  
+
+  
+    const [classes, setClasses] = useState([]);
+  
+    axios.get(`http://localhost:5000/popularClass`).then((data) => {
+      setClasses(data.data);
+    });
+
+
+
+
+
+
   return (
     <div className="bg-blue-100 rounded-xl my-10 md:px-10 px-5">
       <Title
@@ -13,11 +31,11 @@ const PopularClasses = () => {
       ></Title>
       <div className="gap-10 grid md:grid-cols-3 grid-cols-1">
         {/* card  */}
-        <div className="h-[450px] rounded-xl my-6 md:my-10 shadow-xl w-full md:w-[350px] bg-white">
+        {classes.map(course => <div key={course._id} className="h-[450px] rounded-xl my-6 md:my-10 shadow-xl w-full md:w-[350px] bg-white">
           <div className="h-[250px] relative">
             <img
               className=" w-full h-full object-cover p-3 rounded-[25px] "
-              src="https://www.northwordnews.com/uploads/9/0/1/9/9019010/stephen-bauman-drawing_orig.jpg"
+              src={course.classImg}
               alt=""
             />
             <h4 className="absolute px-3 py-1 rounded-xl text-xs flex items-center gap-1 font-semibold text-red-500 right-5 top-5 bg-yellow-300">
@@ -28,10 +46,10 @@ const PopularClasses = () => {
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-xl font-semibold">
-                  Fine art and shading and
+                  {course.className}
                 </h1>
                 <h4 className="text-sm font-semibold text-slate-400">
-                  instructor name
+                  {course.name}
                 </h4>
               </div>
               
@@ -44,7 +62,7 @@ const PopularClasses = () => {
                   className="flex tooltip gap-1 bg-slate-100 px-3 rounded-full py-1 text-center"
                 >
                   <FaRegUser></FaRegUser>
-                  <h2 className="text-xs font-semibold">232</h2>
+                  <h2 className="text-xs font-semibold">{course?.enrollmentCount}</h2>
                 </div>
                 <div
                   data-tip="videos"
@@ -80,7 +98,7 @@ const PopularClasses = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div>)}
       </div>
       <div className="flex items-center justify-center md:pb-10 pb-3 w-full">
         <Link to={'/classes'}><button className="px-5 py-1 text-white font-bold rounded text-xl duration-500 active:text-black active:duration-150 hover:bg-blue-500 bg-blue-600">

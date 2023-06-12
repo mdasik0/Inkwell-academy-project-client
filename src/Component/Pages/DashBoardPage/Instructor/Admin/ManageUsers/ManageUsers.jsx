@@ -12,6 +12,7 @@ const ManageUsers = () => {
     });
     return res.json();
   });
+  refetch()
 
   const handleAdmin = (user) => {
     Swal.fire({
