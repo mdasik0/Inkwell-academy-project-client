@@ -4,38 +4,44 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-// TODO:Provdie key
+
+// TODO: Provide key
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
+
+
+
 const Payment = () => {
-    const [loading,setLoading] = useState(true)
-    const [price,setPrice] = useState(null)
-    
-    const {id} = useParams()
-    
-    
-    useEffect(() => {
-        fetch(`http://localhost:5000/selectedClass/${id}`)
-        .then(res => res.json())
-        .then(data => {
-            setPrice(parseFloat((data.price).toFixed(2)))
-            setLoading(false)
-        })
-    },[])
+  const [loading, setLoading] = useState(true);
+  const [price, setPrice] = useState(null);
 
-    
-    
-    return (
-        <div>
-            <Title topHeader={'Payment'} bottomTitle={'Please proceed to payment'}></Title><div className="w-full flex items-center justify-center">
+  const { id } = useParams();
 
-            {loading && <span className="loading loading-bars loading-lg"></span>}
-            </div>
+  useEffect(() => {
+    fetch(`http://localhost:5000/selectedClass/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPrice(data.price);
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <div>
+      <Title topHeader={"Payment"} bottomTitle={"Please proceed to payment"}></Title>
+      <div className="w-full flex items-center justify-center">
+        {loading ? (
+          <span className="loading loading-bars loading-lg"></span>
+        ) : (
+          price !== null && (
             <Elements stripe={stripePromise}>
-                <CheckoutForm price={price}></CheckoutForm>
+              <CheckoutForm price={price}></CheckoutForm>
             </Elements>
-        </div>
-    );
+          )
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Payment;
