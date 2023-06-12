@@ -14,6 +14,7 @@ import AddaClass from "../../Component/Pages/DashBoardPage/Instructor/AddaClass/
 import MyClasses from "../../Component/Pages/DashBoardPage/Instructor/MyClasses/MyClasses";
 import ManageClasses from "../../Component/Pages/DashBoardPage/Instructor/Admin/ManageClasses/ManageClasses";
 import ManageUsers from "../../Component/Pages/DashBoardPage/Instructor/Admin/ManageUsers/ManageUsers";
+import Payment from "../../Component/Pages/DashBoardPage/Payment/Payment";
 
 const router = createBrowserRouter([
     {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
         {
           path: 'manageUsers',
           element: <ManageUsers></ManageUsers>
+        },
+        {
+          path: 'payment/:id',
+          element: <Payment></Payment>
         },
       ]
     }

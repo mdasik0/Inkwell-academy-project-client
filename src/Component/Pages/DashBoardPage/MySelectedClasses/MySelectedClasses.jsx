@@ -1,16 +1,60 @@
 import { FaMoneyCheckAlt, FaRegTrashAlt } from "react-icons/fa";
 import Title from "../../../Shared/Title/Title";
+import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MySelectedClasses = () => {
-    return (
-        <div className="mb-10">
-        <Title topHeader={'My Selected Classes'} bottomTitle={'All the selected Classes.Pending for payment or get Deleted'}></Title>
+  // selectedClass
+
+  const { data: classes = [] } = useQuery(["users"], async () => {
+    const res = await fetch("http://localhost:5000/selectedClass");
+    return res.json();
+  });
+
+
+  // handle dElete data
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+      //  fetch(``,{
+      //   method:'DELETE'
+      //  })
+      console.log(id)
+      }
+    })
+  }
+
+
+  // Swal.fire(
+  //   'Deleted!',
+  //   'Your file has been deleted.',
+  //   'success'
+  // )
+
+  return (
+    <div className="mb-10">
+      <Title
+        topHeader={"My Selected Classes"}
+        bottomTitle={
+          "All the selected Classes.Pending for payment or get Deleted"
+        }
+      ></Title>
       <div className="overflow-x-auto">
         <table className="table rounded-md table-zebra bg-blue-100">
           {/* head */}
           <thead>
             <tr>
               <th>no.</th>
+              <th>Image</th>
               <th>Name</th>
               <th>Instructor</th>
               <th>Price</th>
@@ -20,23 +64,39 @@ const MySelectedClasses = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            <tr>
-              <th>1</th>
-              <td>Course Name</td>
-              <td>Stephen Bauman</td>
-              <td>$90</td>
-              <td>
-                <button className="btn btn-circle text-xl bg-green-400 btn-sm"><FaMoneyCheckAlt></FaMoneyCheckAlt></button>
-              </td>
-              <td>
-                <button className="btn btn-circle text-xl bg-red-400 btn-sm"><FaRegTrashAlt></FaRegTrashAlt></button>
-              </td>
-            </tr>
+            {classes.map((data, index) => (
+              <tr key={data._id}>
+                <th>{index + 1}</th>
+                <td>
+                  <div className="avatar">
+                    <div className="mask mask-squircle w-20 h-20">
+                      <img
+                        src={data.classImg}
+                        alt="Avatar Tailwind CSS Component"
+                      />
+                    </div>
+                  </div>
+                </td>
+                <td>{data.className}</td>
+                <td>{data.name}</td>
+                <td>${data.price}</td>
+                <td>
+                  <Link to={`/dashboard/payment/${data._id}`}><button className="btn btn-circle text-xl bg-green-400 btn-sm">
+                    <FaMoneyCheckAlt></FaMoneyCheckAlt>
+                  </button></Link>
+                </td>
+                <td>
+                  <button onClick={() => handleDelete(data._id)} className="btn btn-circle text-xl bg-red-400 btn-sm">
+                    <FaRegTrashAlt></FaRegTrashAlt>
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
     </div>
-    );
+  );
 };
 
 export default MySelectedClasses;

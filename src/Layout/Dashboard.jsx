@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   FaBars,
   FaBusinessTime,
@@ -18,8 +18,21 @@ import { AuthContext } from "../Provider/AuthProvider";
 const DashBoard = () => {
   const { user } = useContext(AuthContext);
   const IsAdmin = false;
-  const IsInstructor = true;
-  const cart = ["cart:1", "cart:2", "cart:3"];
+  const IsInstructor = false;
+
+  const [userRole, setUserRole] = useState('')
+  console.log(user.email)
+    useEffect(()=>{
+        fetch('')
+        .then(res => res.json())
+        .then(data => {
+            setUserRole(data.role)
+        })
+    },[])
+
+
+
+
   return (
     <div>
       <div className="drawer lg:drawer-open drawer-overlay bg-slate-100">
@@ -28,16 +41,15 @@ const DashBoard = () => {
           <label
             htmlFor="my-drawer-2"
             className="btn ml-auto btn-primary drawer-button lg:hidden"
-            >
+          >
             Open drawer
           </label>
-            <Outlet></Outlet>
+          <Outlet></Outlet>
         </div>
         <div className="drawer-side text-slate-400 md:w-0 w-2/3 bg-slate-900">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 
           <ul className="menu h-full text-sm font-semibold p-4 pr-0 md:w-80 w-full">
-          
             <div className="w-full my mx-auto">
               <div className="flex items-end my-4 justify-center gap-2">
                 <img
@@ -78,7 +90,6 @@ const DashBoard = () => {
                     <FaUserEdit></FaUserEdit> Manage Users
                   </NavLink>
                 </li>
-                
               </>
             ) : IsInstructor ? (
               //  instructor DashBoard
@@ -93,7 +104,6 @@ const DashBoard = () => {
                     <FaRegCopy></FaRegCopy> My Classes
                   </NavLink>
                 </li>
-               
               </>
             ) : (
               //   user DashBoard
@@ -101,9 +111,6 @@ const DashBoard = () => {
                 <li>
                   <NavLink to="selectedClasses">
                     <FaShoppingCart></FaShoppingCart> My Selected Classes
-                    <span className="bg-red-500 px-2 rounded-full text-sm text-white">
-                      +{cart?.length || 0}
-                    </span>
                   </NavLink>
                 </li>
                 <li>
@@ -135,7 +142,7 @@ const DashBoard = () => {
                 <FaShoppingBag></FaShoppingBag> Order Food
               </NavLink>
             </li>
-            
+
             <li className="flex text-white mt-auto">
               <NavLink to="/order/salad">
                 Log OUt <FaSignOutAlt></FaSignOutAlt>
