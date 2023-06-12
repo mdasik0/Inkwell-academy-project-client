@@ -1,33 +1,84 @@
 import { FaDollarSign, FaRegUser } from "react-icons/fa";
 import Title from "../../Shared/Title/Title";
-import { useQuery } from "@tanstack/react-query";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import useUserRole from "../../../Hooks/useUserRole";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import axios from "axios";
 
 const Classes = () => {
-  const { data: classes = [] } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/approvedClasses");
-    return res.json();
-  });
+  const navigate = useNavigate()
+  const [classes,setclasses] = useState([])
+  const {user} = useContext(AuthContext)
+  
+  useEffect(()=> {
+    axios.get(`http://localhost:5000/approvedClasses`,{
+      headers:{
+        Authorization : `Bearer ${localStorage.getItem("access-token")}`
+      }
+    })
+    .then(data => {
+      setclasses(data?.data)
+    })
+  },[])
+  const [userData] = useUserRole();
 
   const handleSelectedClass = (item) => {
-    console.log(item);
-    const selectedClass = {
-      className: item.className,
-      classImg: item.classImg,
-      email: item.email,
-      name: item.name,
-      price: item.price,
-      seats: item.seats,
-      classId: item._id,
-      payment: 'pending'
-    };
-    fetch("http://localhost:5000/selectedClass", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(selectedClass)
-    });
+    if(user){
+      const selectedClass = {
+        className: item.className,
+        classImg: item.classImg,
+        email: item.email,
+        name: item.name,
+        price: item.price,
+        seats: item.seats,
+        classId: item._id,
+        payment: 'pending'
+      };
+      axios.post(`http://localhost:5000/selectedClass`,selectedClass,{
+        headers: {
+          "content-type": "application/json",
+          Authorization : `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      })
+      
+      .then(data => {
+        if(data?.data?.insertedId){
+          Swal.fire({
+            title: "nice!!!",
+            text: "You have success fully selected this class",
+            icon: "success",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Go to selceted Classes",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate('/dashboard/selectedClasses')
+            }
+          });
+        }
+      })
+    }
+    else{
+        Swal.fire({
+          title: "Please Sign In First!!!",
+          text: "You are not signed in",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Go to Sign in Page",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate('/signIn')
+          }
+        });
+      
+    }
   };
+
 
   return (
     <div className=" md:w-[1280px] mx-auto w-full bg-blue-100 rounded-xl ">
@@ -86,11 +137,12 @@ const Classes = () => {
                   </div>
                 </div>
                 <button
+                  
                   onClick={() => handleSelectedClass(data)}
-                  className="flex items-start mt-3 bg-red-400 text-white hover:text-black rounded-full w-1/2 px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150"
+                  className={userData === 'admin' && `btn-disabled bg-gray-500 flex items-start mt-3  text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150` || userData === 'instructor' && `btn-disabled flex bg-gray-500 items-start mt-3  text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150` || `flex items-start mt-3 bg-red-400 text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150`}
                 >
                   {" "}
-                  Enroll Now
+                  select
                 </button>
               </div>
             </div>

@@ -5,7 +5,11 @@ import { useState } from "react";
 
 const ManageClasses = () => {
   const { data: classes = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/classes");
+    const res = await fetch("http://localhost:5000/classes",{
+      headers:{
+        Authorization : `Bearer ${localStorage.getItem("access-token")}`
+      }
+    });
     return res.json();
   });
   //   all modal data starts here

@@ -14,11 +14,12 @@ const AddaClass = () => {
       const className = form.className.value;
       const classImg = form.classImg.value;
       const seats = parseInt(form.seats.value);
-      const classObject = {className,classImg,name, email,seats,price,status: 'denied'}
+      const classObject = {className,classImg,name, email,seats,price,status: 'pending'}
       fetch(`http://localhost:5000/addClass`,{
         method:'POST',
         headers:{
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          Authorization : `Bearer ${localStorage.getItem("access-token")}`,
         },
         body: JSON.stringify(classObject)
       })

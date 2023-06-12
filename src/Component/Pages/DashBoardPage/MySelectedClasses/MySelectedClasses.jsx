@@ -1,38 +1,38 @@
 import { FaMoneyCheckAlt, FaRegTrashAlt } from "react-icons/fa";
 import Title from "../../../Shared/Title/Title";
-import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const MySelectedClasses = () => {
   // selectedClass
+  const [datas, setData] = useState([]);
+  const axiosSecure = useAxiosSecure();
 
-  const { data: classes = [] } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/selectedClass");
-    return res.json();
-  });
-
+  useEffect(() => {
+    axiosSecure.get(`/selectedClass`).then((data) => setData(data?.data));
+  }, []);
 
   // handle dElete data
   const handleDelete = (id) => {
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-      //  fetch(``,{
-      //   method:'DELETE'
-      //  })
-      console.log(id)
+        //  fetch(``,{
+        //   method:'DELETE'
+        //  })
+        console.log(id);
       }
-    })
-  }
-
+    });
+  };
 
   // Swal.fire(
   //   'Deleted!',
@@ -64,7 +64,7 @@ const MySelectedClasses = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {classes.map((data, index) => (
+            {datas.map((data, index) => (
               <tr key={data._id}>
                 <th>{index + 1}</th>
                 <td>
@@ -81,12 +81,17 @@ const MySelectedClasses = () => {
                 <td>{data.name}</td>
                 <td>${data.price}</td>
                 <td>
-                  <Link to={`/dashboard/payment/${data._id}`}><button className="btn btn-circle text-xl bg-green-400 btn-sm">
-                    <FaMoneyCheckAlt></FaMoneyCheckAlt>
-                  </button></Link>
+                  <Link to={`/dashboard/payment/${data._id}`}>
+                    <button className="btn btn-circle text-xl bg-green-400 btn-sm">
+                      <FaMoneyCheckAlt></FaMoneyCheckAlt>
+                    </button>
+                  </Link>
                 </td>
                 <td>
-                  <button onClick={() => handleDelete(data._id)} className="btn btn-circle text-xl bg-red-400 btn-sm">
+                  <button
+                    onClick={() => handleDelete(data._id)}
+                    className="btn btn-circle text-xl bg-red-400 btn-sm"
+                  >
                     <FaRegTrashAlt></FaRegTrashAlt>
                   </button>
                 </td>

@@ -21,9 +21,21 @@ const AuthProvider = ({ children }) => {
   // =========================== Auth State =========================
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setLoading(false);
-      console.log("current User", currentUser);
       setUser(currentUser);
+      if (currentUser?.email) {
+        fetch(`http://localhost:5000/jwt`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ email: currentUser?.email }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("access-token", data?.token)
+          });
+      }
+      setLoading(false); 
     });
     return () => {
       return unsubscribe();

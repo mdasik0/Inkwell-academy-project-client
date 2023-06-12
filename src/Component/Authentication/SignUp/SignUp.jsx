@@ -20,7 +20,6 @@ const SignUp = () => {
   const { createUser, updateUser } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
-  console.log(error.message);
   const navigate = useNavigate();
 
   const {
@@ -57,6 +56,7 @@ const SignUp = () => {
               method: "POST",
               headers: {
                 "content-type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("access-token")}`,
               },
               body: JSON.stringify(SavedUser),
             })

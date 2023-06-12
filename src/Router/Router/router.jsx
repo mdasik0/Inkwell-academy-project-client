@@ -15,73 +15,79 @@ import MyClasses from "../../Component/Pages/DashBoardPage/Instructor/MyClasses/
 import ManageClasses from "../../Component/Pages/DashBoardPage/Instructor/Admin/ManageClasses/ManageClasses";
 import ManageUsers from "../../Component/Pages/DashBoardPage/Instructor/Admin/ManageUsers/ManageUsers";
 import Payment from "../../Component/Pages/DashBoardPage/Payment/Payment";
+import PrivateRoute from "../PrivateRouter/PrivateRoute";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main></Main>,
-      errorElement: <Error></Error>,
-      children: [
-        {
-            path:'/',
-            element:<Home></Home>
-        },
-        {
-            path:'signUp',
-            element:<SignUp></SignUp>
-        },
-        {
-            path:'signIn',
-            element:<SignIn></SignIn>
-        },
-        {
-            path:'instructors',
-            element:<Instructors></Instructors>
-        },
-        {
-            path:'classes',
-            element:<Classes></Classes>
-        },
-      ]
-    },
-    {
-      path:'dashBoard',
-      element:<DashBoard></DashBoard>,
-      children:[
-        {
-          path: 'selectedClasses',
-          element: <MySelectedClasses></MySelectedClasses>
-        },
-        {
-          path: 'enrolledClasses',
-          element: <MyEnrolledClass></MyEnrolledClass>
-        },
-        {
-          path: 'paymentHistory',
-          element: <PaymentHistory></PaymentHistory>
-        },
-        {
-          path: 'addAClass',
-          element: <AddaClass></AddaClass>
-        },
-        {
-          path: 'myClass',
-          element: <MyClasses></MyClasses>
-        },
-        {
-          path: 'manageCls',
-          element: <ManageClasses></ManageClasses>
-        },
-        {
-          path: 'manageUsers',
-          element: <ManageUsers></ManageUsers>
-        },
-        {
-          path: 'payment/:id',
-          element: <Payment></Payment>
-        },
-      ]
-    }
-  ]);
+  {
+    path: "/",
+    element: <Main></Main>,
+    errorElement: <Error></Error>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "signUp",
+        element: <SignUp></SignUp>,
+      },
+      {
+        path: "signIn",
+        element: <SignIn></SignIn>,
+      },
+
+      {
+        path: "instructors",
+        element: <Instructors></Instructors>,
+      },
+      {
+        path: "classes",
+        element: <Classes></Classes>,
+      },
+    ],
+  },
+  {
+    path: "dashBoard",
+    element: (
+      <PrivateRoute>
+        <DashBoard></DashBoard>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "selectedClasses",
+        element: <MySelectedClasses></MySelectedClasses>,
+      },
+      {
+        path: "enrolledClasses",
+        element: <MyEnrolledClass></MyEnrolledClass>,
+      },
+      {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "addAClass",
+        element: <AddaClass></AddaClass>,
+      },
+      {
+        path: "myClass",
+        element: <MyClasses></MyClasses>,
+      },
+      {
+        path: "manageClasses",
+        element: <ManageClasses></ManageClasses>,
+      },
+      {
+        path: "manageUsers",
+        element: <ManageUsers></ManageUsers>,
+      },
+      {
+        path: "payment/:id",
+        element: <Payment></Payment>,
+      },
+    ],
+  },
+]);
 
 export default router;

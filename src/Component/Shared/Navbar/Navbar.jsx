@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import useUserRole from "../../../Hooks/useUserRole";
 // TODO: Make Avater conditional on user 
 // TODO: Make signin and signout condional on user 
 // TODO: make logout conditional 
@@ -10,6 +11,7 @@ import Swal from "sweetalert2";
 const Navbar = () => {
 
   const {user, logOut} = useContext(AuthContext)
+  const [userData] = useUserRole();
 
   const handleLogout = () => {
     logOut()
@@ -31,6 +33,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       
+      
       <li>
         <NavLink to={'/classes'}>
             classes
@@ -47,7 +50,7 @@ const Navbar = () => {
         user ? 
         <>
         <li>
-          <NavLink to={'/dashBoard'}>
+          <NavLink to={userData === 'admin' && `/dashboard/manageClasses` || userData === 'instructor' && `/dashboard/myClass` || `/dashboard/selectedClasses`}>
             Dashboard
           </NavLink>
         </li>

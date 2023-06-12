@@ -1,37 +1,39 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import {
-  FaBars,
   FaBusinessTime,
+  FaFileAlt,
   FaFolderPlus,
   FaHome,
   FaReceipt,
   FaRegCopy,
-  FaShoppingBag,
   FaShoppingCart,
   FaSignOutAlt,
   FaUserEdit,
+  FaUserTie,
   FaWallet,
 } from "react-icons/fa";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import useUserRole from "../Hooks/useUserRole";
+import Swal from "sweetalert2";
 
 const DashBoard = () => {
-  const { user } = useContext(AuthContext);
-  const IsAdmin = false;
-  const IsInstructor = false;
+  const { user, logOut } = useContext(AuthContext);
+  const [userData] = useUserRole();
+  const navigate = useNavigate();
 
-  const [userRole, setUserRole] = useState('')
-  console.log(user.email)
-    useEffect(()=>{
-        fetch('')
-        .then(res => res.json())
-        .then(data => {
-            setUserRole(data.role)
-        })
-    },[])
-
-
-
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        Swal.fire(
+          "LogOut Successful",
+          "You have logged out of your account successfully!",
+          "success"
+        );
+        navigate("/");
+      })
+      .catch((error) => console.error(error));
+  };
 
   return (
     <div>
@@ -69,7 +71,7 @@ const DashBoard = () => {
                     </div>
                   </div>
                   <h3 className="text-white">{user?.displayName}</h3>
-                  <h3 className="text-slate-600 text-xs ">student</h3>
+                  <h3 className="text-slate-600 text-xs ">{userData}</h3>
                 </div>
               ) : (
                 <></>
@@ -77,11 +79,11 @@ const DashBoard = () => {
             </div>
 
             <div className="border border-slate-600 w-full my-5"></div>
-            {IsAdmin ? (
+            {(userData === "admin" && (
               //  Admin DashBoard
               <>
                 <li>
-                  <NavLink to="manageCls">
+                  <NavLink to="manageClasses">
                     <FaBusinessTime></FaBusinessTime> Manage Classes
                   </NavLink>
                 </li>
@@ -91,40 +93,41 @@ const DashBoard = () => {
                   </NavLink>
                 </li>
               </>
-            ) : IsInstructor ? (
-              //  instructor DashBoard
-              <>
-                <li>
-                  <NavLink to="addAClass">
-                    <FaFolderPlus></FaFolderPlus> Add a Class
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="myClass">
-                    <FaRegCopy></FaRegCopy> My Classes
-                  </NavLink>
-                </li>
-              </>
-            ) : (
-              //   user DashBoard
-              <>
-                <li>
-                  <NavLink to="selectedClasses">
-                    <FaShoppingCart></FaShoppingCart> My Selected Classes
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="enrolledClasses">
-                    <FaReceipt></FaReceipt> My Enrolled Classes
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="paymentHistory">
-                    <FaWallet></FaWallet> Payment History
-                  </NavLink>
-                </li>
-              </>
-            )}
+            )) ||
+              (userData === "instructor" && (
+                //  instructor DashBoard
+                <>
+                  <li>
+                    <NavLink to="addAClass">
+                      <FaFolderPlus></FaFolderPlus> Add a Class
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="myClass">
+                      <FaRegCopy></FaRegCopy> My Classes
+                    </NavLink>
+                  </li>
+                </>
+              )) || (
+                //   user DashBoard
+                <>
+                  <li>
+                    <NavLink to="selectedClasses">
+                      <FaShoppingCart></FaShoppingCart> My Selected Classes
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="enrolledClasses">
+                      <FaReceipt></FaReceipt> My Enrolled Classes
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="paymentHistory">
+                      <FaWallet></FaWallet> Payment History
+                    </NavLink>
+                  </li>
+                </>
+              )}
 
             <div className="border border-slate-600 w-full my-5"></div>
             <li>
@@ -133,20 +136,23 @@ const DashBoard = () => {
               </NavLink>{" "}
             </li>
             <li>
-              <NavLink to="/menu">
-                <FaBars></FaBars> Our Menu
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/order/salad">
-                <FaShoppingBag></FaShoppingBag> Order Food
+              <NavLink to={"/classes"}>
+                <FaFileAlt></FaFileAlt>classes
               </NavLink>
             </li>
 
-            <li className="flex text-white mt-auto">
-              <NavLink to="/order/salad">
-                Log OUt <FaSignOutAlt></FaSignOutAlt>
+            <li>
+              <NavLink to={"/instructors"}>
+                <FaUserTie></FaUserTie>instructors
               </NavLink>
+            </li>
+
+            <li
+              onClick={handleLogout}
+              className=" text-white mt-auto mb-3 ml-3"
+            >
+              Log Out
+              <FaSignOutAlt></FaSignOutAlt>
             </li>
           </ul>
         </div>
