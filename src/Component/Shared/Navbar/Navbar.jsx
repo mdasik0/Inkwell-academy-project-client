@@ -1,16 +1,28 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import useUserRole from "../../../Hooks/useUserRole";
-// TODO: Make Avater conditional on user 
-// TODO: Make signin and signout condional on user 
-// TODO: make logout conditional 
-// TODO: make dashboard conditional 
+import { motion } from "framer-motion";
 
 const Navbar = () => {
+  const [darkMode, setDarkMode] = useState(false);
 
-  const {user, logOut} = useContext(AuthContext)
+  useEffect(() => {
+    const body = document.body;
+    if (darkMode) {
+      body.setAttribute('data-theme', 'dark');
+    } else {
+      body.setAttribute('data-theme', 'light');
+      
+    }
+  }, [darkMode]);
+
+  const handleToggle = () => {
+    setDarkMode(!darkMode);
+  };
+
+  const { user, logOut } = useContext(AuthContext);
   const [userData] = useUserRole();
 
   const handleLogout = () => {
@@ -28,59 +40,73 @@ const Navbar = () => {
   const Navbar = (
     <>
       <li>
-        <NavLink to={'/'}>
-            home
-        </NavLink>
+        <NavLink to={"/"}>home</NavLink>
       </li>
-      
-      
+
       <li>
-        <NavLink to={'/classes'}>
-            classes
-        </NavLink>
+        <NavLink to={"/classes"}>classes</NavLink>
       </li>
-      
+
       <li>
-        <NavLink to={'/instructors'}>
-            instructors
-        </NavLink>
+        <NavLink to={"/instructors"}>instructors</NavLink>
       </li>
-      
-      {
-        user ? 
+
+      {user ? (
         <>
-        <li>
-          <NavLink to={userData === 'admin' && `/dashboard/manageClasses` || userData === 'instructor' && `/dashboard/myClass` || `/dashboard/selectedClasses`}>
-            Dashboard
-          </NavLink>
-        </li>
-        <li onClick={handleLogout}>
-          <Link>
-              Log Out
-          </Link>
-        </li>
+          <li>
+            <NavLink
+              to={
+                (userData === "admin" && `/dashboard/manageClasses`) ||
+                (userData === "instructor" && `/dashboard/myClass`) ||
+                `/dashboard/selectedClasses`
+              }
+            >
+              Dashboard
+            </NavLink>
+          </li>
+          <li onClick={handleLogout}>
+            <Link>Log Out</Link>
+          </li>
         </>
-        
-        :
+      ) : (
         <>
-        <li>
-        <NavLink to={'/signIn'}>
-            sign in
-        </NavLink>
-      </li>
-      
-      <li>
-        <NavLink to={'/signUp'}>
-            sign up
-        </NavLink>
-      </li>
+          <li>
+            <NavLink to={"/signIn"}>sign in</NavLink>
+          </li>
+
+          <li>
+            <NavLink to={"/signUp"}>sign up</NavLink>
+          </li>
         </>
-      }
-      
+      )}
+      <li>
+        <label className="swap swap-rotate">
+          {/* this hidden checkbox controls the state */}
+          <input type="checkbox" onChange={handleToggle} />
+
+          {/* sun icon */}
+          <svg
+            className="swap-on fill-current w-5 h-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z" />
+          </svg>
+
+          {/* moon icon */}
+          <svg
+            className="swap-off fill-current w-5 h-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z" />
+          </svg>
+        </label>
+      </li>
     </>
   );
   return (
-    <div className="navbar mx-auto md:w-[1280px] md:bg-transparent bg-base-100">
+    <div className="navbar mx-auto md:w-[1280px] overflow-hidden md:bg-transparent bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -101,7 +127,6 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={1}
-            
             className="menu menu-sm static z-50 dropdown-content uppercase mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             {/* navbar here */}
@@ -110,29 +135,32 @@ const Navbar = () => {
         </div>
         {/* TODO: Update the Logo to a link before submit */}
         {/* Logo Here */}
-        <div className="flex items-center justify-center gap-2">
+        <motion.div animate={{ y:0}} initial={{ y:'100%'}} transition={{delay:0.5,duration:1}} className="flex overflow-hidden items-center justify-center gap-2">
           <img className="h-16 md:block hidden" src="/favicon.png" alt="" />
-          <h4 className="text-2xl md:flex-none flex items-baseline  logo_font">Inkwell <span className="text-xs">.Academy</span></h4>
-        </div>
+          <h4 className="text-2xl md:flex-none flex items-baseline  logo_font">
+            Inkwell <span className="text-xs">.Academy</span>
+          </h4>
+        </motion.div>
       </div>
-      <div className={`${user? 'navbar-center' : 'navbar-end'} hidden lg:flex`}>
-        <ul className="menu uppercase font-semibold menu-horizontal px-1">{/* navbar here */}
-        {Navbar}
-        </ul>
+      <div
+        className={`${user ? "navbar-center" : "navbar-end"} hidden overflow-hidden lg:flex`}
+      >
+        <motion.ul animate={{ y:0}} initial={{ y:'100%'}} transition={{delay:0.5,duration:1}} className="menu uppercase font-semibold menu-horizontal px-1">
+          {/* navbar here */}
+          {Navbar}
+        </motion.ul>
       </div>
-      {
-        user 
-        ? <div className="navbar-end">
-        <div className="avatar online">
-          <div className="md:w-14 w-12  rounded-full">
-            <img src={user?.photoURL} />
+      {user ? (
+        <div className="navbar-end">
+          <div className="avatar online">
+            <div className="md:w-14 w-12  rounded-full">
+              <img src={user?.photoURL} />
+            </div>
           </div>
         </div>
-      </div> 
-      :
-      <></>
-      }
-      
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

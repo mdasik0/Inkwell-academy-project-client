@@ -137,7 +137,7 @@ const ManageClasses = () => {
             className="card md:w-96 w-full bg-base-100 shadow-xl"
           >
             <figure className="h-[250px]">
-              <img src={item.classImg} alt="Shoes" />
+              <img src={item.classImg} alt="images of classes" />
             </figure>
             <div className="card-body">
               <h2 className="card-title">{item.className}</h2>
@@ -146,7 +146,7 @@ const ManageClasses = () => {
                 <h4>Email: {item.email}</h4>
                 <h4>Seats: {item.seats}</h4>
                 <h4>Price: ${item.price}</h4>
-                <h4>Price: ${item?.review}</h4>
+                <h4>review: {item?.review}</h4>
                 <h4>
                   Status:{" "}
                   <span

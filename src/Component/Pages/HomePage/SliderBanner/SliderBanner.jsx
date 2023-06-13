@@ -3,9 +3,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Navigation, Pagination } from "swiper";
+import { motion } from "framer-motion";
 const SliderBanner = () => {
   return (
-    <div className="mb-10">
+    <motion.div animate={{ scale:'100%'}} initial={{ scale:0}} transition={{duration:2}}  className="mb-10">
       <Swiper
         pagination={{
           type: "progressbar",
@@ -37,7 +38,7 @@ const SliderBanner = () => {
           />
         </SwiperSlide>
       </Swiper>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,4 +1,4 @@
-import { FaDollarSign, FaRegUser } from "react-icons/fa";
+import { FaChair, FaDollarSign,  } from "react-icons/fa";
 import Title from "../../Shared/Title/Title";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,7 @@ import useUserRole from "../../../Hooks/useUserRole";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import axios from "axios";
+import { motion } from "framer-motion";
 
 const Classes = () => {
   const navigate = useNavigate()
@@ -93,9 +94,9 @@ const Classes = () => {
       <div className="md:p-10 p-3 grid md:grid-cols-3 grid-cols-1 gap-10">
         {/* card  */}
         {classes.map((data) => (
-          <div
+          <motion.div animate={{ scale:'100%'}} initial={{ scale:0}} transition={{delay:0.3,duration:0.5}} 
             key={data._id}
-            className="h-[500px] rounded-xl shadow-xl w-full md:w-[350px] bg-white"
+            className={data.seats <= 0  ? `pointer-events-none h-[500px] rounded-xl shadow-xl w-full md:w-[350px]  bg-red-600` : `h-[500px] rounded-xl shadow-xl w-full md:w-[350px] bg-white`}
           >
             <div className="h-[250px]">
               <img
@@ -117,7 +118,14 @@ const Classes = () => {
               <div>
                 <div className="flex flex-col items-start justify-evenly">
                   <div className="flex gap-2 items-center  rounded-full py-1 text-center">
-                    <FaRegUser></FaRegUser>
+                    <FaChair></FaChair>
+                    <h3 className="text-xs text-slate-500 font-semibold">
+                      Total Seats:
+                    </h3>
+                    <h2 className="text-xs font-semibold">{data.Totalseats}</h2>
+                  </div>
+                  <div className="flex gap-2 items-center  rounded-full py-1 text-center">
+                    <FaChair></FaChair>
                     <h3 className="text-xs text-slate-500 font-semibold">
                       Available Seats:
                     </h3>
@@ -147,7 +155,7 @@ const Classes = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

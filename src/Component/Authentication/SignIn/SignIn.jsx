@@ -59,8 +59,8 @@ const SignIn = () => {
         onSubmit={handleSubmit}
         className="flex flex-col w-full md:w-1/2 relative md:p-10 px-2 py-6 border-4 border-blue-600 rounded-xl items-center "
       >
-        <h3 className="text-3xl font-bold text-blue-500 absolute left-10 -top-5 bg-white px-2 border-x-[3px] rounded border-blue-500">
-          Sign In
+        <h3 className="text-3xl font-bold text-blue-500 absolute left-10 -top-8 bg-white px-2 py-2 border-[3px] rounded-full border-blue-500">
+          Sign in
         </h3>
         <div className="form-control">
           <label className="label">
