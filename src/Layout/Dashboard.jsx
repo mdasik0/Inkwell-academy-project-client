@@ -16,6 +16,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import useUserRole from "../Hooks/useUserRole";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const DashBoard = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -30,13 +31,16 @@ const DashBoard = () => {
           "You have logged out of your account successfully!",
           "success"
         );
-        navigate("/");
       })
       .catch((error) => console.error(error));
+      navigate("/");
   };
 
   return (
     <div>
+      <Helmet>
+        <title>Inkwell | DashBoard</title>
+      </Helmet>
       <div className="drawer lg:drawer-open drawer-overlay bg-slate-100">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center">
@@ -56,7 +60,7 @@ const DashBoard = () => {
               <div className="flex items-end my-4 justify-center gap-2">
                 <img data-aos="fade-right" data-aos-easing="linear" 
                   className="h-10 md:block hidden"
-                  src="/favicon.png"
+                  src="https://i.ibb.co/98tg6ry/favicon.png"
                   alt=""
                 />
                 <h4 data-aos="fade-right" data-aos-easing="linear"  className="text-2xl md:flex-none flex items-baseline  logo_font">

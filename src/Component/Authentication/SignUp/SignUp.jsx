@@ -52,14 +52,19 @@ const SignUp = () => {
               photo: photoUrl,
               role: "student",
             };
-            fetch(`http://localhost:5000/users`, {
-              method: "POST",
-              headers: {
-                "content-type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-              },
-              body: JSON.stringify(SavedUser),
-            })
+            fetch(
+              `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/users`,
+              {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem(
+                    "access-token"
+                  )}`,
+                },
+                body: JSON.stringify(SavedUser),
+              }
+            )
               .then((res) => res.json())
               .then((data) => {
                 if (data.insertedId) {

@@ -1,18 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import Title from "../../../../../Shared/Title/Title";
-// TODO: Use swal to promote admin and instructors
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/users", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-      },
-    });
+    const res = await fetch(
+      "https://b7a12-summer-camp-server-side-mdasik0.vercel.app/users",
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      }
+    );
     return res.json();
   });
-  refetch()
+  refetch();
 
   const handleAdmin = (user) => {
     Swal.fire({
@@ -25,9 +28,12 @@ const ManageUsers = () => {
       confirmButtonText: "Yes, Promote Him!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/users/admin/${user._id}`, {
-          method: "PATCH",
-        })
+        fetch(
+          `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/users/admin/${user._id}`,
+          {
+            method: "PATCH",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.modifiedCount) {
@@ -53,9 +59,12 @@ const ManageUsers = () => {
       confirmButtonText: "Yes, Promote Him!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
-          method: "PATCH",
-        })
+        fetch(
+          `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/users/instructor/${user._id}`,
+          {
+            method: "PATCH",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.modifiedCount) {
@@ -73,6 +82,9 @@ const ManageUsers = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Inkwell | Manage Users</title>
+      </Helmet>
       <Title
         topHeader={"Manage Users"}
         bottomTitle={

@@ -2,14 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import Title from "../../../../../Shared/Title/Title";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const ManageClasses = () => {
   const { data: classes = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/classes",{
-      headers:{
-        Authorization : `Bearer ${localStorage.getItem("access-token")}`
+    const res = await fetch(
+      "https://b7a12-summer-camp-server-side-mdasik0.vercel.app/classes",
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
       }
-    });
+    );
     return res.json();
   });
   //   all modal data starts here
@@ -40,15 +44,18 @@ const ManageClasses = () => {
       confirmButtonText: "Yes, send it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        const data = { review : reviewText};
+        const data = { review: reviewText };
         console.log(data);
-        fetch(`http://localhost:5000/classes/review/${id}`, {
-          method: "PATCH",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
+        fetch(
+          `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/classes/review/${id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.modifiedCount) {
@@ -79,9 +86,12 @@ const ManageClasses = () => {
       confirmButtonText: "Yes, Approve it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/classes/approve/${item._id}`, {
-          method: "PATCH",
-        })
+        fetch(
+          `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/classes/approve/${item._id}`,
+          {
+            method: "PATCH",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.modifiedCount) {
@@ -103,9 +113,12 @@ const ManageClasses = () => {
       confirmButtonText: "Yes, Deny it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/classes/deny/${item._id}`, {
-          method: "PATCH",
-        })
+        fetch(
+          `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/classes/deny/${item._id}`,
+          {
+            method: "PATCH",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.modifiedCount) {
@@ -123,6 +136,9 @@ const ManageClasses = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Inkwell | Manage Classes</title>
+      </Helmet>
       <Title
         topHeader={"Manage Classes"}
         bottomTitle={
@@ -184,10 +200,15 @@ const ManageClasses = () => {
                   Deny
                 </button>
 
-                {/* TODO: add a review function where if review is clicked a modal will open and with input text and submit and patch once again */}
                 <button
                   onClick={() => handleButtonClick(item._id)}
-                  className={ !item.review || item.status === 'approved' || item.status === 'denied' ? `px-4 py-2 text-blue-500 border-2 border-blue-500 hover:bg-blue-500 hover:text-white duration-500 text-sm font-semibold w-full` : `btn-disabled px-4 py-2 text-blue-500 border-2 border-blue-500 hover:bg-blue-500 hover:text-white duration-500 text-sm font-semibold w-full`   }
+                  className={
+                    !item.review ||
+                    item.status === "approved" ||
+                    item.status === "denied"
+                      ? `px-4 py-2 text-blue-500 border-2 border-blue-500 hover:bg-blue-500 hover:text-white duration-500 text-sm font-semibold w-full`
+                      : `btn-disabled px-4 py-2 text-blue-500 border-2 border-blue-500 hover:bg-blue-500 hover:text-white duration-500 text-sm font-semibold w-full`
+                  }
                 >
                   Review
                 </button>
@@ -199,7 +220,7 @@ const ManageClasses = () => {
                   <div className="bg-white w-1/3 rounded-xl p-4">
                     <h2 className="text-xl font-bold mb-2">Review</h2>
                     {/* input */}
-                    
+
                     <form onSubmit={handleSubmit}>
                       <div className="w-full">
                         <div className="w-full">

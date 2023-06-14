@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Swal from "sweetalert2";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://b7a12-summer-camp-server-side-mdasik0.vercel.app",
 });
 
 const useAxiosSecure = () => {
@@ -20,12 +20,11 @@ const useAxiosSecure = () => {
   axiosSecure.interceptors.response.use(
     (response) => response,
     (error) => {
-      if (error.response && (error?.response?.status === 403 || error?.response.status === 401)) {
-        Swal.fire(
-          "Error!",
-          `${error?.response?.data?.error}`,
-          "error"
-        );
+      if (
+        error.response &&
+        (error?.response?.status === 403 || error?.response.status === 401)
+      ) {
+        Swal.fire("Error!", `${error?.response?.data?.error}`, "error");
       }
       return Promise.reject(error);
     }

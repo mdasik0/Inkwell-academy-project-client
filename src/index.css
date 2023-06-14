@@ -28,3 +28,7 @@ a.active{
 .homepage{
     font-family: 'Dancing Script', cursive;
 }
+
+.bg_for_extraSection{
+    background-image: url('https://img.freepik.com/free-vector/abstract-dark-blue-vector-futuristic-digital-grid-background_53876-110562.jpg?w=900&t=st=1686738058~exp=1686738658~hmac=fef7356d9f2602e98f0d3c80a6ffc49faab17fcc2933978c2b0e48da1a1a9c41');
+}

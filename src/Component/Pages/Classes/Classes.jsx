@@ -1,4 +1,4 @@
-import { FaChair, FaDollarSign,  } from "react-icons/fa";
+import { FaChair, FaDollarSign } from "react-icons/fa";
 import Title from "../../Shared/Title/Title";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -7,26 +7,31 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 const Classes = () => {
-  const navigate = useNavigate()
-  const [classes,setclasses] = useState([])
-  const {user} = useContext(AuthContext)
-  
-  useEffect(()=> {
-    axios.get(`http://localhost:5000/approvedClasses`,{
-      headers:{
-        Authorization : `Bearer ${localStorage.getItem("access-token")}`
-      }
-    })
-    .then(data => {
-      setclasses(data?.data)
-    })
-  },[])
+  const navigate = useNavigate();
+  const [classes, setclasses] = useState([]);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/approvedClasses`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+          },
+        }
+      )
+      .then((data) => {
+        setclasses(data?.data);
+      });
+  }, []);
   const [userData] = useUserRole();
 
   const handleSelectedClass = (item) => {
-    if(user){
+    if (user) {
       const selectedClass = {
         className: item.className,
         classImg: item.classImg,
@@ -36,54 +41,59 @@ const Classes = () => {
         price: item.price,
         seats: item.seats,
         classId: item._id,
-        payment: 'pending'
+        payment: "pending",
       };
-      axios.post(`http://localhost:5000/selectedClass`,selectedClass,{
-        headers: {
-          "content-type": "application/json",
-          Authorization : `Bearer ${localStorage.getItem("access-token")}`,
-        },
-      })
-      
-      .then(data => {
-        if(data?.data?.insertedId){
-          Swal.fire({
-            title: "nice!!!",
-            text: "You have success fully selected this class",
-            icon: "success",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Go to selceted Classes",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              navigate('/dashboard/selectedClasses')
-            }
-          });
-        }
-      })
-    }
-    else{
-        Swal.fire({
-          title: "Please Sign In First!!!",
-          text: "You are not signed in",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Go to Sign in Page",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate('/signIn')
+      axios
+        .post(
+          `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/selectedClass`,
+          selectedClass,
+          {
+            headers: {
+              "content-type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+            },
+          }
+        )
+
+        .then((data) => {
+          if (data?.data?.insertedId) {
+            Swal.fire({
+              title: "nice!!!",
+              text: "You have success fully selected this class",
+              icon: "success",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Go to selceted Classes",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                navigate("/dashboard/selectedClasses");
+              }
+            });
           }
         });
-      
+    } else {
+      Swal.fire({
+        title: "Please Sign In First!!!",
+        text: "You are not signed in",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Go to Sign in Page",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/signIn");
+        }
+      });
     }
   };
 
-
   return (
     <div className=" md:w-[1280px] mx-auto w-full bg-blue-100 rounded-xl ">
+      <Helmet>
+        <title>Inkwell | Classes</title>
+      </Helmet>
       <Title
         topHeader={"All Classes"}
         bottomTitle={
@@ -94,9 +104,16 @@ const Classes = () => {
       <div className="md:p-10 p-3 grid md:grid-cols-3 grid-cols-1 gap-10">
         {/* card  */}
         {classes.map((data) => (
-          <motion.div animate={{ scale:'100%'}} initial={{ scale:0}} transition={{delay:0.3,duration:0.5}} 
+          <motion.div
+            animate={{ scale: "100%" }}
+            initial={{ scale: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
             key={data._id}
-            className={data.seats <= 0  ? `pointer-events-none h-[500px] rounded-xl shadow-xl w-full md:w-[350px]  bg-red-600` : `h-[500px] rounded-xl shadow-xl w-full md:w-[350px] bg-white`}
+            className={
+              data.seats <= 0
+                ? `pointer-events-none h-[500px] rounded-xl shadow-xl w-full md:w-[350px]  bg-red-600`
+                : `h-[500px] rounded-xl shadow-xl w-full md:w-[350px] bg-white`
+            }
           >
             <div className="h-[250px]">
               <img
@@ -146,9 +163,14 @@ const Classes = () => {
                   </div>
                 </div>
                 <button
-                  
                   onClick={() => handleSelectedClass(data)}
-                  className={userData === 'admin' && `btn-disabled bg-gray-500 flex items-start mt-3  text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150` || userData === 'instructor' && `btn-disabled flex bg-gray-500 items-start mt-3  text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150` || `flex items-start mt-3 bg-red-400 text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150`}
+                  className={
+                    (userData === "admin" &&
+                      `btn-disabled bg-gray-500 flex items-start mt-3  text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150`) ||
+                    (userData === "instructor" &&
+                      `btn-disabled flex bg-gray-500 items-start mt-3  text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150`) ||
+                    `flex items-start mt-3 bg-red-400 text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150`
+                  }
                 >
                   {" "}
                   select

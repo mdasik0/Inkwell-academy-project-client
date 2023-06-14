@@ -1,12 +1,11 @@
 const Footer = () => {
-    // TODO: switch logo img with links
   return (
     <>
     
       <footer className="p-10 bg-base-200 text-base-content">
         <div className=" mx-auto flex md:flex-row flex-col items-start md:items-center justify-around footer md:w-[1280px]">
           <div>
-            <img className="w-20 h-20 object-cover" src="/favicon.png" alt="" />
+            <img className="w-20 h-20 object-cover" src="https://i.ibb.co/98tg6ry/favicon.png" alt="" />
             <p>
               <span className="logo_font text-lg">Inkwell</span> Academy.
               <br />

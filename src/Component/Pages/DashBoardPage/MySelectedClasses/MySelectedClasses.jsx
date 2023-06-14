@@ -5,14 +5,19 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../../Provider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const MySelectedClasses = () => {
   // selectedClass
   const [datas, setData] = useState([]);
-  const {user} = useContext(AuthContext)
-  console.log(user.email)
+  const { user } = useContext(AuthContext);
+  console.log(user.email);
   useEffect(() => {
-    axios.get(`http://localhost:5000/selectedClass/${user?.email}`).then((data) => setData(data?.data));
+    axios
+      .get(
+        `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/selectedClass/${user?.email}`
+      )
+      .then((data) => setData(data?.data));
   }, []);
 
   // handle dElete data
@@ -43,6 +48,9 @@ const MySelectedClasses = () => {
 
   return (
     <div className="mb-10">
+      <Helmet>
+        <title>Inkwell | MySelectedClass</title>
+      </Helmet>
       <Title
         topHeader={"My Selected Classes"}
         bottomTitle={

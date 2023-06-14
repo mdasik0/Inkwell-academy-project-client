@@ -5,22 +5,22 @@ const ClassData = ({ course }) => {
     console.log()
   return (
     <div>
-      <div className="h-[450px] rounded-xl my-6 md:my-10 shadow-xl w-full md:w-[350px] bg-white">
+      <div data-aos='zoom-in' data-aos-offset='200' className="h-[450px] overflow-hidden rounded-xl my-6 md:my-10 shadow-xl w-full md:w-[350px] bg-white">
         <div className="h-[250px] relative">
-          <img
+          <img data-aos='zoom-in' data-aos-duration='1000' data-aos-offset='300'
             className=" w-full h-full object-cover p-3 rounded-[25px] "
             src={course.classImg}
             alt=""
           />
-          <h4 className="absolute px-3 py-1 rounded-xl text-xs flex items-center gap-1 font-semibold text-red-500 right-5 top-5 bg-yellow-300">
+          <h4  className="absolute px-3 py-1 rounded-xl text-xs flex items-center gap-1 font-semibold text-red-500 right-5 top-5 bg-yellow-300">
             <FaStar></FaStar> Top Rated
           </h4>
         </div>
         <div className="h-[180px] flex flex-col justify-between px-4 w-full">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-xl font-semibold">{course.className}</h1>
-              <h4 className="text-sm font-semibold text-slate-400">
+              <h1 data-aos='fade-right' data-aos-duration='600' data-aos-delay='200' className="text-xl font-semibold">{course.className}</h1>
+              <h4 data-aos='fade-right' data-aos-duration='600' data-aos-delay='200'  className="text-sm font-semibold text-slate-400">
                 {course.name}
               </h4>
             </div>
@@ -60,13 +60,13 @@ const ClassData = ({ course }) => {
                 <h2 className="text-xs font-semibold">3month</h2>
               </div>
             </div>
-            <div className="mt-2">
+            <div data-aos='fade-right' data-aos-duration='500' data-aos-delay='200'  className="mt-2">
               <progress
                 className="progress progress-error mb-1 w-full"
                 value={percentLeft}
                 max="100"
               ></progress>
-              <div className="flex justify-between">
+              <div  className="flex justify-between">
                 <div className="flex gap-1">
                   <h4 className="text-xs text-slate-400 ">Enrolled:</h4>
                   <h5 className="text-xs font-semibold">{percentLeft}%</h5>

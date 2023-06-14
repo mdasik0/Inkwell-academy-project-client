@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       if (currentUser?.email) {
-        fetch(`http://localhost:5000/jwt`, {
+        fetch(`https://b7a12-summer-camp-server-side-mdasik0.vercel.app/jwt`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -32,10 +32,10 @@ const AuthProvider = ({ children }) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            localStorage.setItem("access-token", data?.token)
+            localStorage.setItem("access-token", data?.token);
           });
       }
-      setLoading(false); 
+      setLoading(false);
     });
     return () => {
       return unsubscribe();

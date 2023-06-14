@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Title from "../../../Shared/Title/Title";
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import ClassData from "./ClassData/ClassData";
 const PopularClasses = () => {
@@ -9,7 +8,9 @@ const PopularClasses = () => {
   const [classes, setClasses] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/popularClass`)
+    fetch(
+      `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/popularClass`
+    )
       .then((res) => res.json())
       .then((data) => {
         setClasses(data);
@@ -17,8 +18,10 @@ const PopularClasses = () => {
   }, []);
 
   return (
-    <motion.div animate={{ x: [0,100,0] }} transition={{ ease: "easeOut", duration: 2, type: "spring" }} className="bg-blue-100 rounded-xl my-10 md:px-10 px-5">
-      
+    <div
+      data-aos="fade-right"
+      className="bg-blue-100 rounded-xl my-10 md:px-10 px-5"
+    >
       <Title
         topHeader={"Popular classes"}
         bottomTitle={
@@ -33,12 +36,16 @@ const PopularClasses = () => {
       </div>
       <div className="flex items-center justify-center md:pb-10 pb-3 w-full">
         <Link to={"/classes"}>
-          <button className="px-5 py-1 text-white font-bold rounded text-xl duration-500 active:text-black active:duration-150 hover:bg-blue-500 bg-blue-600">
+          <button
+            data-aos="zoom-in"
+            data-aos-duration="1000"
+            className="px-5 py-1 text-white font-bold rounded text-xl duration-500 active:text-black active:duration-150 hover:bg-blue-500 bg-blue-600"
+          >
             See All
           </button>{" "}
         </Link>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

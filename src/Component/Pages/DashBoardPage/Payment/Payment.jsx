@@ -5,11 +5,7 @@ import CheckoutForm from "./CheckoutForm";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-// TODO: Provide key
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
-
-
-
 
 const Payment = () => {
   const [loading, setLoading] = useState(true);
@@ -19,19 +15,24 @@ const Payment = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/paymentToClass/${id}`)
+    fetch(
+      `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/paymentToClass/${id}`
+    )
       .then((res) => res.json())
       .then((data) => {
-        setData(data)
+        setData(data);
         setPrice(data.price);
         setLoading(false);
       });
   }, []);
 
-  console.log(data)
+  console.log(data);
   return (
     <div>
-      <Title topHeader={"Payment"} bottomTitle={"Please proceed to payment"}></Title>
+      <Title
+        topHeader={"Payment"}
+        bottomTitle={"Please proceed to payment"}
+      ></Title>
       <div className="w-full flex items-center justify-center">
         {loading ? (
           <span className="loading loading-bars loading-lg"></span>

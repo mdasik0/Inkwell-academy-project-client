@@ -24,7 +24,7 @@ const CheckoutForm = ({ price, data }) => {
     if (priceInt > 0) {
       axios
         .post(
-          "http://localhost:5000/create-payment-intent",
+          "https://b7a12-summer-camp-server-side-mdasik0.vercel.app/create-payment-intent",
           { price: priceInt },
           {
             headers: {
@@ -130,7 +130,9 @@ const CheckoutForm = ({ price, data }) => {
           );
         });
       axios
-        .patch(`http://localhost:5000/updateData/${data?.classId}`)
+        .patch(
+          `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/updateData/${data?.classId}`
+        )
         .then((res) => {
           console.log(res.data);
           if (res.data.success) {

@@ -2,18 +2,26 @@ import axios from "axios";
 import Title from "../../Shared/Title/Title";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 const Instructors = () => {
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/instructors`).then((data) => {
-      setInstructors(data.data);
-    });
+    axios
+      .get(
+        `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/instructors`
+      )
+      .then((data) => {
+        setInstructors(data.data);
+      });
   }, []);
 
   return (
     <div className=" md:w-[1280px] mx-auto w-full bg-purple-100 rounded-xl ">
+      <Helmet>
+        <title>Inkwell | Instructors</title>
+      </Helmet>
       <Title
         topHeader={"All Instructors"}
         bottomTitle={

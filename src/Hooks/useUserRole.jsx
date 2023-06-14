@@ -12,7 +12,7 @@ const useUserRole = () => {
       try {
         if (user && user?.email) {
           const response = await fetch(
-            `http://localhost:5000/users/${user?.email}`,
+            `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/users/${user?.email}`,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("access-token")}`,

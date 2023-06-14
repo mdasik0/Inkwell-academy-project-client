@@ -2,15 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import Title from "../../../../Shared/Title/Title";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../../../Provider/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const MyClasses = () => {
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   const { data: classes = [] } = useQuery(["users"], async () => {
-    const res = await fetch(`http://localhost:5000/myClasses/${user?.email}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-      },
-    });
+    const res = await fetch(
+      `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/myClasses/${user?.email}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      }
+    );
     return res.json();
   });
   const [showModal, setShowModal] = useState(false);
@@ -27,6 +31,9 @@ const MyClasses = () => {
   };
   return (
     <div className="md:mb-10 mb-6">
+      <Helmet>
+        <title>Inkwell | My Classes</title>
+      </Helmet>
       <Title
         topHeader={"My classes"}
         bottomTitle={"All the classes Added by this instructor are showen here"}

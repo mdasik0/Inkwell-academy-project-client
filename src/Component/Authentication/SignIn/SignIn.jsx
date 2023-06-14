@@ -1,13 +1,22 @@
-import { FaEye, FaEyeSlash, FaRegEnvelope, FaUnlock } from "react-icons/fa";
+import { FaExclamationCircle, FaEye, FaEyeSlash, FaRegEnvelope, FaUnlock } from "react-icons/fa";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
 
-// TODO: use react hook form on this page
 
 const SignIn = () => {
+  const {
+    register,
+    reset,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const password = useRef({});
+  password.current = watch("password", "");
 
   const {signInUser} = useContext(AuthContext)
 
@@ -19,11 +28,9 @@ const SignIn = () => {
   const from = location.state?.from?.pathname || "/";
 
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const email = form.email.value;
-    const password = form.password.value;
+  const onSubmit = (data) => {
+    const email = data.email;
+    const password = data.password; 
 
     // navigate
     
@@ -38,13 +45,12 @@ const SignIn = () => {
             "You have logged in to your account successfully!",
             "success"
           );
-
+          reset();
           navigate(from, { replace: true });
         }
       })
       .catch((error) => console.error(error));
 
-    form.reset();
   };
   return (
     <div className="border-2 mt-2 mb-10 p-2 md:p-10 mx-auto rounded-xl flex md:flex-row flex-col items-center justify-around md:w-[1280px]">
@@ -56,7 +62,7 @@ const SignIn = () => {
         />
       </div>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col w-full md:w-1/2 relative md:p-10 px-2 py-6 border-4 border-blue-600 rounded-xl items-center "
       >
         <h3 className="text-3xl font-bold text-blue-500 absolute left-10 -top-8 bg-white px-2 py-2 border-[3px] rounded-full border-blue-500">
@@ -71,14 +77,19 @@ const SignIn = () => {
               <FaRegEnvelope></FaRegEnvelope>
             </span>
             <input
-              name="email"
-              required
+              {...register("email", { required: true })}
               type="email"
               placeholder="Your email here"
               className="input border-2  border-blue-500"
             />
           </label>
         </div>
+        {errors.email && (
+          <span className="text-red-500 text-xs font-semibold flex items-center gap-1 mt-2">
+            {" "}
+            <FaExclamationCircle></FaExclamationCircle> Email is required
+          </span>
+        )}
         <div className="form-control relative">
           <label className="label">
             <span className="label-text">Your Password</span>
@@ -88,8 +99,7 @@ const SignIn = () => {
               <FaUnlock></FaUnlock>
             </span>
             <input
-              name="password"
-              required
+              {...register("password", { required: true })}
               type={show ? `text` : `password`}
               placeholder="Your Password here"
               className="input border-2 border-blue-500"
@@ -111,6 +121,12 @@ const SignIn = () => {
                 </span>
               )}
         </div>
+        {errors.password && (
+          <span className="text-red-500 text-xs font-semibold flex items-center gap-1 mt-2">
+            {" "}
+            <FaExclamationCircle></FaExclamationCircle> Password is required
+          </span>
+        )}
           <label className="label ml-6 md:ml-0  w-full md:w-2/3 flex items-start">
             <span className="label-text hover:text-blue-700 hover:underline font-semibold">
               Forgotten Password?

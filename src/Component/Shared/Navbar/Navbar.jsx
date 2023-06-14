@@ -133,10 +133,9 @@ const Navbar = () => {
             {Navbar}
           </ul>
         </div>
-        {/* TODO: Update the Logo to a link before submit */}
         {/* Logo Here */}
         <motion.div animate={{ y:0}} initial={{ y:'100%'}} transition={{delay:0.5,duration:1}} className="flex overflow-hidden items-center justify-center gap-2">
-          <img className="h-16 md:block hidden" src="/favicon.png" alt="" />
+          <img className="h-16 md:block hidden" src="https://i.ibb.co/98tg6ry/favicon.png" alt="" />
           <h4 className="text-2xl md:flex-none flex items-baseline  logo_font">
             Inkwell <span className="text-xs">.Academy</span>
           </h4>
