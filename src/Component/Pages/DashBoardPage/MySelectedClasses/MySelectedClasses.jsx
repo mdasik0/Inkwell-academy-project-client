@@ -2,23 +2,41 @@ import { FaMoneyCheckAlt, FaRegTrashAlt } from "react-icons/fa";
 import Title from "../../../Shared/Title/Title";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 import { Helmet } from "react-helmet-async";
+import { useQuery } from "@tanstack/react-query";
 
 const MySelectedClasses = () => {
   // selectedClass
-  const [datas, setData] = useState([]);
   const { user } = useContext(AuthContext);
-  console.log(user.email);
-  useEffect(() => {
-    axios
-      .get(
+
+
+
+  const {
+    data: datas = [],
+    isLoading,
+    refetch,
+    error,
+  } = useQuery({
+    queryFn: async () => {
+      const data = await axios(
         `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/selectedClass/${user?.email}`
-      )
-      .then((data) => setData(data?.data));
-  }, []);
+      );
+      return data?.data;
+    },
+    queryKey: ["data"],
+  });
+
+  if (isLoading)
+    return <span className="loading loading-spinner loading-lg"></span>;
+
+  if (error) return "An error has Occurred";
+
+
+
+  
 
   // handle dElete data
   const handleDelete = (id) => {
@@ -32,19 +50,24 @@ const MySelectedClasses = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        //  fetch(``,{
-        //   method:'DELETE'
-        //  })
-        console.log(id);
+        axios.delete(`https://b7a12-summer-camp-server-side-mdasik0.vercel.app/DeletedSelectedClass/${id}`)
+        .then(data => {
+          if(data?.data?.deletedCount){
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+            refetch()
+          }
+        })
+       
+        
       }
     });
   };
 
-  // Swal.fire(
-  //   'Deleted!',
-  //   'Your file has been deleted.',
-  //   'success'
-  // )
+  
 
   return (
     <div className="mb-10">

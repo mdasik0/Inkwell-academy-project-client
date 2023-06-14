@@ -45,15 +45,7 @@ const Classes = () => {
       };
       axios
         .post(
-          `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/selectedClass`,
-          selectedClass,
-          {
-            headers: {
-              "content-type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("access-token")}`,
-            },
-          }
-        )
+          `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/selectedClass`,selectedClass)
 
         .then((data) => {
           if (data?.data?.insertedId) {
