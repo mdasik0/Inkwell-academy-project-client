@@ -1,11 +1,16 @@
-import { FaExclamationCircle, FaEye, FaEyeSlash, FaRegEnvelope, FaUnlock } from "react-icons/fa";
+import {
+  FaExclamationCircle,
+  FaEye,
+  FaEyeSlash,
+  FaRegEnvelope,
+  FaUnlock,
+} from "react-icons/fa";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
-
 
 const SignIn = () => {
   const {
@@ -18,7 +23,7 @@ const SignIn = () => {
   const password = useRef({});
   password.current = watch("password", "");
 
-  const {signInUser} = useContext(AuthContext)
+  const { signInUser } = useContext(AuthContext);
 
   const [show, setShow] = useState(false);
 
@@ -27,14 +32,11 @@ const SignIn = () => {
 
   const from = location.state?.from?.pathname || "/";
 
-
   const onSubmit = (data) => {
     const email = data.email;
-    const password = data.password; 
+    const password = data.password;
 
     // navigate
-    
-
 
     // login
     signInUser(email, password)
@@ -50,7 +52,6 @@ const SignIn = () => {
         }
       })
       .catch((error) => console.error(error));
-
   };
   return (
     <div className="border-2 mt-2 mb-10 p-2 md:p-10 mx-auto rounded-xl flex md:flex-row flex-col items-center justify-around md:w-[1280px]">
@@ -103,23 +104,23 @@ const SignIn = () => {
               type={show ? `text` : `password`}
               placeholder="Your Password here"
               className="input border-2 border-blue-500"
-              />
+            />
           </label>
-              {show ? (
-                <span
-                  onClick={() => setShow(!show)}
-                  className="absolute bottom-2 duration-500 text-blue-700 rounded-full p-2 right-1"
-                >
-                  <FaEye></FaEye>
-                </span>
-              ) : (
-                <span
-                  onClick={() => setShow(!show)}
-                  className="absolute bottom-2 duration-500 text-blue-700 rounded-full p-2 right-1"
-                >
-                  <FaEyeSlash></FaEyeSlash>
-                </span>
-              )}
+          {show ? (
+            <span
+              onClick={() => setShow(!show)}
+              className="absolute bottom-2 duration-500 text-blue-700 rounded-full p-2 right-1"
+            >
+              <FaEye></FaEye>
+            </span>
+          ) : (
+            <span
+              onClick={() => setShow(!show)}
+              className="absolute bottom-2 duration-500 text-blue-700 rounded-full p-2 right-1"
+            >
+              <FaEyeSlash></FaEyeSlash>
+            </span>
+          )}
         </div>
         {errors.password && (
           <span className="text-red-500 text-xs font-semibold flex items-center gap-1 mt-2">
@@ -127,11 +128,11 @@ const SignIn = () => {
             <FaExclamationCircle></FaExclamationCircle> Password is required
           </span>
         )}
-          <label className="label ml-6 md:ml-0  w-full md:w-2/3 flex items-start">
-            <span className="label-text hover:text-blue-700 hover:underline font-semibold">
-              Forgotten Password?
-            </span>
-          </label>
+        <label className="label ml-6 md:ml-0  w-full md:w-2/3 flex items-start">
+          <span className="label-text hover:text-blue-700 hover:underline font-semibold">
+            Forgotten Password?
+          </span>
+        </label>
         <div className="md:w-2/3  ml-6 md:ml-0 w-full">
           <input
             className="uppercase input text-sm btn bg-blue-600 text-white hover:bg-blue-400"

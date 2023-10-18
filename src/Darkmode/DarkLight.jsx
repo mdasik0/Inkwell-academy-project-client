@@ -8,6 +8,7 @@ const DarkLight = () => {
         {/* this hidden checkbox controls the state */}
         <input type="checkbox" />
 
+hi this is asik just like checking what is goingon 
         {/* sun icon */}
         <svg
           className="swap-on fill-current w-5 h-5"
