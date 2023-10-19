@@ -1,3 +1,4 @@
+import "./Navbar.css"
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
@@ -93,12 +94,15 @@ const Navbar = () => {
           </ul>
         </div>
         {/* Logo Here */}
-        <div className="bg-[#1eb2a6]  h-full">
+        <div className="bg-[#1eb2a6] divSlid">
           <img
-            className="h-full  w-[160px] py-3 px-2 md:block hidden"
+            className="h-full  w-[160px] py-3 pl-4 md:block hidden"
             src={logo}
             alt=""
           />
+          {/* <div className="rightbox">
+
+          </div> */}
         </div>
       </div>
       <div className={`hidden overflow-hidden lg:flex`}>
