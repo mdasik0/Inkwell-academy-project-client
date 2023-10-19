@@ -32,21 +32,7 @@ a.active {
   border-bottom: 54px solid transparent;
 }
 
-.logosection {
-    height: 54px;
-    position: relative;
-    background-color: #1eb2a6;
-}
-.logosection::after {
-    position: absolute;
-    content: '';
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    right: 0px;
-    background-color: blue;
-    transform: skewX(25deg);
-}
+
 
 .bg_for_extraSection {
   background-image: url("https://img.freepik.com/free-vector/abstract-dark-blue-vector-futuristic-digital-grid-background_53876-110562.jpg?w=900&t=st=1686738058~exp=1686738658~hmac=fef7356d9f2602e98f0d3c80a6ffc49faab17fcc2933978c2b0e48da1a1a9c41");

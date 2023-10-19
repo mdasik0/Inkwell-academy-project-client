@@ -13,3 +13,7 @@
     right: -20px;
     transform: skewX(25deg);
 }
+
+.bgPrimary {
+    background-color: #1eb2a6;
+}
