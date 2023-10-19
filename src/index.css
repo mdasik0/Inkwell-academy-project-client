@@ -2,17 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* fonts */
 
 *{
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
-.logo_font{
-    font-family: 'Satisfy', cursive;
-}
+
 a.active{
-    color: #006aff;
-    border-bottom: 4px solid #006aff;
+    color: #1eb2a6;
     border-radius: 0;
     background-color: transparent;
 }
@@ -25,8 +23,9 @@ a.active{
     border-top-left-radius: 19px;
     border-bottom-left-radius: 19px;
 }
-.homepage{
-    font-family: 'Dancing Script', cursive;
+
+.logoSeciton::after {
+content: 'amar name ';
 }
 
 .bg_for_extraSection{
