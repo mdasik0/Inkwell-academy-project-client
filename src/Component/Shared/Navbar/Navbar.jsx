@@ -106,7 +106,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar mx-auto md:w-[1280px] overflow-hidden md:bg-transparent bg-base-100">
+    <div className="navbar absolute right-[50%] left-[50%] top-14 -translate-x-[50%] mx-auto md:w-[1280px] overflow-hidden md:bg-transparent bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
