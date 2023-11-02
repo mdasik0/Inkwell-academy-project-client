@@ -1,7 +1,8 @@
+import SocialProof from "../SocialProof/SocialProof";
 import "./HeroSection.css";
 const HeroSection = () => {
   return (
-    <div className="text-white w-full h-[96vh] flex justify-center flex-col lg:p-36 p-6 py-10  HeroSectionBG">
+    <div className="text-white w-full h-[96vh] flex justify-center relative flex-col lg:p-36 p-6 py-10  HeroSectionBG">
       <h4 className="text-sm  uppercase">
         Welcome to Inkwell Academy
       </h4>
@@ -12,6 +13,7 @@ const HeroSection = () => {
         <button className="font-semibold text-sm uppercase bg-[#1eb2a6] hover:text-[#1eb2a6] hover:bg-white duration-300     p-3 rounded text-white">Get Started Now !</button>
         <button className="font-semibold text-sm uppercase border border-white hover:border-[#1eb2a6] p-3 rounded hover:bg-[#1eb2a6;] duration-300 text-white ">View Courses</button>
       </div>
+      <SocialProof />
     </div>
   );
 };

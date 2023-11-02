@@ -99,7 +99,7 @@ const Navbar = () => {
   );
   return (
     <>
-      <div className="flex items-center md:absolute justify-between md:right-[50%] md:left-[50%] md:top-14 md:-translate-x-[50%] mx-auto md:w-[1280px] text-white overflow-hidden bg-[#00000023]">
+      <div className="flex z-50 items-center md:absolute justify-between md:right-[50%] md:left-[50%] md:top-14 md:-translate-x-[50%] mx-auto md:w-[1280px] text-white overflow-hidden bg-[#00000023]">
         <div className="">
           {/* Logo Here */}
           <div className="bg-[#1eb2a6] divSlid">

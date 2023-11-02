@@ -1,0 +1,7 @@
+.position_fixing {    
+    position: absolute;
+    bottom: -6rem;
+    left: 50%;
+    translate: -50%;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
