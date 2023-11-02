@@ -2,7 +2,7 @@ import SocialProof from "../SocialProof/SocialProof";
 import "./HeroSection.css";
 const HeroSection = () => {
   return (
-    <div className="text-white w-full h-[96vh] flex justify-center relative flex-col lg:p-36 p-6 py-10  HeroSectionBG">
+    <div className="text-white w-full lg:h-[96vh] h-[60vh] flex justify-center -z-1 relative flex-col lg:p-36 p-6 py-10  HeroSectionBG">
       <h4 className="text-sm  uppercase">
         Welcome to Inkwell Academy
       </h4>
