@@ -4,6 +4,7 @@ import PopularClasses from "../PopularClasses/PopularClasses";
 import PopularInstructors from "../PopularInstructors/PopularInstructors";
 import ExtraSection from "../ExtraSection/ExtraSection";
 import HeroSection from "../HeroSection/HeroSection";
+import OnlineEducation from "../OnlineEducation/OnlineEducation";
 
 const Home = () => {
   return (
@@ -13,7 +14,7 @@ const Home = () => {
       </Helmet>
         <HeroSection />
       <div className=" md:w-[1280px] mx-auto w-full">
-
+        <OnlineEducation />
         <PopularClasses></PopularClasses>
 
         <PopularInstructors></PopularInstructors>
