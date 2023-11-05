@@ -47,7 +47,8 @@ const OnlineEducation = () => {
           <div className="flex justify-between p-6 bg-gray-100 rounded-lg hover:bg-gray-300 duration-500 items-center gap-6">
             <img src={certificate} alt="onlineClass" />
             <div>
-              <h4 className="text-lg font-semibold text-[#1eb2a6]">Get Your Certificate</h4>
+              <h4 className="text-lg font-semibold text-[#1eb2a6]">Get Your Certificate
+              </h4>
               <p className="text-gray-600">
                 Learn Online From anywhere around the world. No matter where you
                 are. you can learn from us 24/7. Through our online program you
