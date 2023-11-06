@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
 import Title from "../../../Shared/Title/Title";
-import { useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 
 const PopularInstructors = () => {
   const [instructors, setInstructors] = useState([]);
 
-  axios
-    .get(
+  useEffect(() => {
+    fetch(
       `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/instructorsSix`
     )
-    .then((data) => {
-      setInstructors(data.data);
-    });
+      .then((res) => res.json())
+      .then((data) => {
+        setInstructors(data);
+      });
+  }, []);
   return (
     <div className="bg-[#E6E6FA] rounded-xl my-10">
       <Title

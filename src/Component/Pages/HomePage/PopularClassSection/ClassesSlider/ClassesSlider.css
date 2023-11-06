@@ -1,0 +1,7 @@
+.swiper-pagination {
+    z-index: -1 !important;
+    text-align: end !important;
+}
+.swiper-pagination-bullet-active {
+  background: #1eb2a6 !important;
+}

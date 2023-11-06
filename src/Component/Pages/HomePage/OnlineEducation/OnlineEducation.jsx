@@ -4,7 +4,7 @@ import expert from "../../../../assets/icons/expert.png";
 import certificate from "../../../../assets/icons/certificate.png";
 const OnlineEducation = () => {
   return (
-    <div className="w-full flex justify-between items-start my-24 h-full py-6">
+    <div className="w-full flex justify-between items-start mt-36 mb-20 h-full py-6">
       <div className="w-1/2 h-[700px]">
         <img
           className="w-full h-full object-cover rounded-lg"
