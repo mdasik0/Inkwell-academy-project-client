@@ -1,10 +1,11 @@
 import { Helmet } from "react-helmet-async";
 // import PopularClasses from "../PopularClasses/PopularClasses";
-import PopularInstructors from "../PopularInstructors/PopularInstructors";
 import ExtraSection from "../ExtraSection/ExtraSection";
 import HeroSection from "../HeroSection/HeroSection";
 import OnlineEducation from "../OnlineEducation/OnlineEducation";
 import PopularClassesSection from "../PopularClassSection/PopularClassesSection";
+import PopularInstructorsSection from "../PopularInstructorSection/PopularInstructorsSection";
+import LearningProcess from "../LearningProcess/LearningProcess";
 
 const Home = () => {
   return (
@@ -17,7 +18,9 @@ const Home = () => {
         <OnlineEducation />
         {/* <PopularClasses></PopularClasses> */}
         <PopularClassesSection />
-        <PopularInstructors></PopularInstructors>
+        {/* <PopularInstructors></PopularInstructors> */}
+        <LearningProcess />
+        <PopularInstructorsSection />
         <ExtraSection></ExtraSection>
       </div>
     </div>

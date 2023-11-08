@@ -1,5 +1,7 @@
 const PopularInstructorsSection = () => {
-  return <div></div>;
+  return <div className=" bg-slate-50">
+    hello world
+  </div>;
 };
 
 export default PopularInstructorsSection;
