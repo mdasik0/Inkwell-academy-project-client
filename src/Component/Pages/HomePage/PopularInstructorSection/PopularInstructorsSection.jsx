@@ -15,7 +15,7 @@ const PopularInstructorsSection = () => {
       });
   }, []);
   return (
-    <div className="h-[80vh] mt-20">
+    <div className="h-full mt-20">
       <h1 className="text-4xl font-bold text-center mb-10">
         Our renowned <span className="text-[#1eb2a6]">Instructors</span>
       </h1>
