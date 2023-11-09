@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet-async";
 // import PopularClasses from "../PopularClasses/PopularClasses";
-import ExtraSection from "../ExtraSection/ExtraSection";
 import HeroSection from "../HeroSection/HeroSection";
 import OnlineEducation from "../OnlineEducation/OnlineEducation";
 import PopularClassesSection from "../PopularClassSection/PopularClassesSection";
 import PopularInstructorsSection from "../PopularInstructorSection/PopularInstructorsSection";
 import LearningProcess from "../LearningProcess/LearningProcess";
+import NewsLetter from "../NewsLetter/NewsLetter";
 
 const Home = () => {
   return (
@@ -21,8 +21,8 @@ const Home = () => {
         {/* <PopularInstructors></PopularInstructors> */}
         <LearningProcess />
         <PopularInstructorsSection />
-        <ExtraSection></ExtraSection>
       </div>
+      <NewsLetter />
     </div>
   );
 };
