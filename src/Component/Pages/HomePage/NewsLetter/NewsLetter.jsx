@@ -1,4 +1,18 @@
+import Swal from "sweetalert2";
+
 const NewsLetter = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const email = e.target.email.value;
+    if(email) {
+      Swal.fire(
+        "Subscribed",
+        "You have successfully Subscribed for Our Newsletter!",
+        "success"
+      );
+      e.target.email.value = "";
+    }
+  }
   return (
     <div
       style={{
@@ -9,7 +23,7 @@ const NewsLetter = () => {
       }}
       className="mt-20 h-[300px]"
     >
-      <form className="flex justify-center items-center h-full flex-col">
+      <form onSubmit={handleSubmit} className="flex justify-center items-center h-full flex-col">
         <h1 className="text-center text-4xl font-bold">
           Subscribe to our Newsletter
         </h1>
@@ -19,7 +33,7 @@ const NewsLetter = () => {
         </p>
         <div className="flex items-center gap-3">
           <input
-            className="my-3 border px-3 py-2 w-[300px] rounded outline-none"
+            className="my-3 border border-gray-400 px-3 py-2 w-[300px] rounded outline-none"
             type="email"
             name="email"
             placeholder="Enter your email here"

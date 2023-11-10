@@ -1,45 +1,77 @@
+import {BsDribbble, BsFacebook, BsInstagram, BsLinkedin} from "react-icons/bs"
+import logo from "../../../assets/logo/inkwell-logo-white.svg";
 const Footer = () => {
   return (
-    <>
-    
-      <footer className="p-10 bg-base-200 text-base-content">
-        <div className=" mx-auto flex md:flex-row flex-col items-start md:items-center justify-around footer md:w-[1280px]">
-          <div>
-            <img className="w-20 h-20 object-cover" src="https://i.ibb.co/98tg6ry/favicon.png" alt="" />
-            <p>
-              <span className="logo_font text-lg">Inkwell</span> Academy.
-              <br />
-              Address: 19/B, Road 3, Dhanmondi, <br />
-              Dhaka-1205, Bangladesh.
-            </p>
-          </div>
-          <div>
-            <span className="footer-title">Services</span>
-            <a className="link link-hover">Art Critics</a>
-            <a className="link link-hover">LifeLong Support</a>
-            <a className="link link-hover">Friendly Instructors</a>
-            <a className="link link-hover">Learning Enviroment</a>
-          </div>
-          <div>
-            <span className="footer-title">Company</span>
-            <a className="link link-hover">About us</a>
-            <a className="link link-hover">Contact</a>
-            <a className="link link-hover">Hiring Instructors</a>
-            <a className="link link-hover">sponsored by OhioArts.</a>
-          </div>
-          <div>
-            <span className="footer-title">Legal</span>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
-            <a className="link link-hover"></a>
-          </div>
+    <footer className="h-full p-16 bg-[#1eb2a6] text-white">
+      <div className="flex justify-around items-start">
+        {/* logo */}
+        <div>
+          <img className="h-full  w-[130px]" src={logo} alt="website logo" />
+          <p className="italic text-sm w-[300px] mt-4">
+            &quot;Cultivating Creativity, Nurturing Talent, and Inspiring
+            Artistic Excellence&quot;
+          </p>
         </div>
-      </footer>
-      <div className="text-center text-xs py-4   bg-base-200 text-gray-500">
-        <p>Copyright © 2023 - All right reserved by <span className="logo_font text-lg">InkWell</span> Academy.</p>
+        {/* about */}
+        <div>
+          <h4 className="font-bold text-lg mb-3">About</h4>
+          <p className="text-sm mt-1 hover:underline duration-300 cursor-pointer">
+            Terms & Conditions
+          </p>
+          <p className="text-sm mt-1 hover:underline duration-300 cursor-pointer">
+            Privacy Policy
+          </p>
+          <p className="text-sm mt-1 hover:underline duration-300 cursor-pointer">
+            Documentation
+          </p>
+          <p className="text-sm mt-1 hover:underline duration-300 cursor-pointer">
+            FAQ
+          </p>
+        </div>
+        <div>
+          <h4 className="font-bold text-lg mb-3">Courses</h4>
+          <p className="text-sm mt-1 hover:underline duration-300 cursor-pointer">
+            Blocking Shapes
+          </p>
+          <p className="text-sm mt-1 hover:underline duration-300 cursor-pointer">
+            Outline making
+          </p>
+          <p className="text-sm mt-1 hover:underline duration-300 cursor-pointer">
+            Coloring
+          </p>
+          <p className="text-sm mt-1 hover:underline duration-300 cursor-pointer">
+            Mecha Drawing
+          </p>
+        </div>
+        <div>
+          <h4 className="font-bold text-lg mb-3">Contact</h4>
+          <p className="text-sm mt-1 hover:underline duration-300 cursor-pointer">
+            asikthe1st@gmail.com
+          </p>
+          <p className="text-sm mt-1 hover:underline duration-300 cursor-pointer">
+            +880123456789
+          </p>
+          <p className="text-sm mt-1 hover:underline duration-300 cursor-pointer">
+            32th st kalibazar, Narayanganj, Bangladesh
+          </p>
+        </div>
       </div>
-    </>
+      {/* socials */}
+      <div className="w-full text-center flex items-center justify-center gap-4 mt-16">
+          <a href="" className="border w-fit p-3 cursor-pointer rounded-full  hover:bg-[rgba(255,255,255,0.24)] duration-500">
+            <BsFacebook />
+          </a>
+          <div className="border w-fit p-3 cursor-pointer rounded-full  hover:bg-[rgba(255,255,255,0.24)] duration-500">
+            <BsInstagram />
+          </div>
+          <a href={'https://www.linkedin.com/in/mdasik0/'} className="border w-fit p-3 cursor-pointer rounded-full  hover:bg-[rgba(255,255,255,0.24)] duration-500">
+            <BsLinkedin />
+          </a>
+          <div className="border w-fit p-3 cursor-pointer rounded-full  hover:bg-[rgba(255,255,255,0.24)] duration-500">
+            <BsDribbble />
+          </div>
+      </div>
+    </footer>
   );
 };
 
