@@ -16,10 +16,10 @@ const PopularInstructorsSection = () => {
   }, []);
   return (
     <div className="h-full mt-20">
-      <h1 className="text-4xl font-bold text-center mb-10">
+      <h1 className="text-4xl mx-3 font-bold text-center mb-10">
         Our renowned <span className="text-[#1eb2a6]">Instructors</span>
       </h1>
-      <div className="p-10 grid grid-cols-3 gap-10">
+      <div className="p-10 grid grid-cols-1 place-items-center md:grid-cols-3 gap-10">
         {instructors.map((teacher) => (
           <InstructorCard key={teacher._id} teacher={teacher} />
         ))}

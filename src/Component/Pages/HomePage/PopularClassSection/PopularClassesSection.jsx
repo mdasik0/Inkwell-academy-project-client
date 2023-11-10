@@ -2,9 +2,9 @@ import { BsArrowRightShort } from "react-icons/bs";
 import ClassesSlider from "./ClassesSlider/ClassesSlider";
 const PopularClassesSection = () => {
   return (
-    <div className=" p-6 flex justify-between items-center">
+    <div className=" p-6 flex md:flex-row flex-col justify-between items-center">
       {/* info */}
-      <div className="w-1/2 p-4">
+      <div className="md:w-1/2 w-full md:p-4 mb-4">
         {/* title  */}
         <div className="text-5xl font-bold">
           <h1 className="text-[#1eb2a6]">Explore</h1>
@@ -22,7 +22,7 @@ const PopularClassesSection = () => {
         </button>
       </div>
       {/* classes */}
-      <div className="w-1/3">
+      <div className="md:w-1/3 w-full">
         <ClassesSlider />
       </div>
     </div>

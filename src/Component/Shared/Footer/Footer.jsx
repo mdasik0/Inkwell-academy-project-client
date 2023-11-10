@@ -1,9 +1,14 @@
-import {BsDribbble, BsFacebook, BsInstagram, BsLinkedin} from "react-icons/bs"
+import {
+  BsDribbble,
+  BsFacebook,
+  BsInstagram,
+  BsLinkedin,
+} from "react-icons/bs";
 import logo from "../../../assets/logo/inkwell-logo-white.svg";
 const Footer = () => {
   return (
     <footer className="h-full p-16 bg-[#1eb2a6] text-white">
-      <div className="flex justify-around items-start">
+      <div className="flex flex-col md:flex-row justify-center gap-10 md:justify-around items-start">
         {/* logo */}
         <div>
           <img className="h-full  w-[130px]" src={logo} alt="website logo" />
@@ -57,19 +62,25 @@ const Footer = () => {
         </div>
       </div>
       {/* socials */}
-      <div className="w-full text-center flex items-center justify-center gap-4 mt-16">
-          <a href="" className="border w-fit p-3 cursor-pointer rounded-full  hover:bg-[rgba(255,255,255,0.24)] duration-500">
-            <BsFacebook />
-          </a>
-          <div className="border w-fit p-3 cursor-pointer rounded-full  hover:bg-[rgba(255,255,255,0.24)] duration-500">
-            <BsInstagram />
-          </div>
-          <a href={'https://www.linkedin.com/in/mdasik0/'} className="border w-fit p-3 cursor-pointer rounded-full  hover:bg-[rgba(255,255,255,0.24)] duration-500">
-            <BsLinkedin />
-          </a>
-          <div className="border w-fit p-3 cursor-pointer rounded-full  hover:bg-[rgba(255,255,255,0.24)] duration-500">
-            <BsDribbble />
-          </div>
+      <div className="w-full text-center flex items-center justify-center gap-4 mt-8 md:mt-16">
+        <a
+          href=""
+          className="border w-fit p-3 cursor-pointer rounded-full  hover:bg-[rgba(255,255,255,0.24)] duration-500"
+        >
+          <BsFacebook />
+        </a>
+        <div className="border w-fit p-3 cursor-pointer rounded-full  hover:bg-[rgba(255,255,255,0.24)] duration-500">
+          <BsInstagram />
+        </div>
+        <a
+          href={"https://www.linkedin.com/in/mdasik0/"}
+          className="border w-fit p-3 cursor-pointer rounded-full  hover:bg-[rgba(255,255,255,0.24)] duration-500"
+        >
+          <BsLinkedin />
+        </a>
+        <div className="border w-fit p-3 cursor-pointer rounded-full  hover:bg-[rgba(255,255,255,0.24)] duration-500">
+          <BsDribbble />
+        </div>
       </div>
     </footer>
   );

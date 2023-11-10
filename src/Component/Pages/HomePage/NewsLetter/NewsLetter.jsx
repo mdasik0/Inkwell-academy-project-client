@@ -17,23 +17,21 @@ const NewsLetter = () => {
     <div
       style={{
         backgroundImage: ` url(https://i.ibb.co/NCJfb7j/newsletter-banner.jpg)`,
-        backgroundPosition: "right",
-        backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
       }}
-      className="mt-20 h-[300px]"
+      className="md:mt-20 md:bg-right md:bg-contain bg-auto  h-[300px]"
     >
       <form onSubmit={handleSubmit} className="flex justify-center items-center h-full flex-col">
         <h1 className="text-center text-4xl font-bold">
           Subscribe to our Newsletter
         </h1>
-        <p className="text-center text-gray-500 text-sm my-6">
+        <p className="text-center text-gray-500 mx-3  text-sm my-6">
           Subscribe to our newsletter for updates on our latest courses, free
           tutorials, expert advice, art tips, tricks, and much more!
         </p>
         <div className="flex items-center gap-3">
           <input
-            className="my-3 border border-gray-400 px-3 py-2 w-[300px] rounded outline-none"
+            className="my-3 border border-gray-400 px-3 py-2 md:w-[300px] w-full rounded outline-none"
             type="email"
             name="email"
             placeholder="Enter your email here"
