@@ -11,7 +11,6 @@ import SingleSlide from "./SingleSlide/SingleSlide";
 SwiperCore.use([Pagination, Keyboard, Autoplay]);
 
 const ClassesSlider = () => {
-
   const [Courses, setCourses] = useState([]);
 
   useEffect(() => {
@@ -24,24 +23,24 @@ const ClassesSlider = () => {
       });
   }, []);
 
-  console.log(Courses)
-
   return (
     <Swiper
       cssMode={true}
       pagination={true}
       loop={true}
       autoplay={{
-        delay: 2500,
+        delay: 4000,
         disableOnInteraction: false,
       }}
       keyboard={true}
       modules={[Autoplay, Pagination, Keyboard]}
       className="mySwiper"
     >
-      {
-        Courses.map(course => <SwiperSlide key={course._id} ><SingleSlide course={course} /></SwiperSlide>)
-      }
+      {Courses.map((course) => (
+        <SwiperSlide key={course._id}>
+          <SingleSlide course={course} />
+        </SwiperSlide>
+      ))}
       <SwiperNav />
     </Swiper>
   );

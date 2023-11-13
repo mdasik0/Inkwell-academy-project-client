@@ -2,7 +2,6 @@ import { FaChair, FaDollarSign } from "react-icons/fa";
 import useUserRole from "../../../Hooks/useUserRole";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import useEnroll from "../../../Hooks/useEnroll";
 
@@ -35,10 +34,7 @@ const Classes = () => {
       <div className="md:p-10 p-3 grid md:grid-cols-3 grid-cols-1 gap-10">
         {/* card  */}
         {classes.map((data) => (
-          <motion.div
-            animate={{ scale: "100%" }}
-            initial={{ scale: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+          <div
             key={data._id}
             className={
               data.seats <= 0
@@ -103,12 +99,11 @@ const Classes = () => {
                     `flex items-start mt-3 bg-red-400 text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150`
                   }
                 >
-                  {" "}
-                  select
+                  Enroll
                 </button>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
