@@ -1,18 +1,14 @@
 import { FaChair, FaDollarSign } from "react-icons/fa";
-import Title from "../../Shared/Title/Title";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 import useUserRole from "../../../Hooks/useUserRole";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
+import useEnroll from "../../../Hooks/useEnroll";
 
 const Classes = () => {
-  const navigate = useNavigate();
   const [classes, setclasses] = useState([]);
-  const { user } = useContext(AuthContext);
+  const { handleSelectedClass } = useEnroll();
 
   useEffect(() => {
     axios
@@ -30,68 +26,11 @@ const Classes = () => {
   }, []);
   const [userData] = useUserRole();
 
-  const handleSelectedClass = (item) => {
-    if (user) {
-      const selectedClass = {
-        className: item.className,
-        classImg: item.classImg,
-        instructorEmail: item.email,
-        email: user?.email,
-        name: item.name,
-        price: item.price,
-        seats: item.seats,
-        classId: item._id,
-        payment: "pending",
-      };
-      axios
-        .post(
-          `https://b7a12-summer-camp-server-side-mdasik0.vercel.app/selectedClass`,selectedClass)
-
-        .then((data) => {
-          if (data?.data?.insertedId) {
-            Swal.fire({
-              title: "nice!!!",
-              text: "You have success fully selected this class",
-              icon: "success",
-              showCancelButton: true,
-              confirmButtonColor: "#3085d6",
-              cancelButtonColor: "#d33",
-              confirmButtonText: "Go to selceted Classes",
-            }).then((result) => {
-              if (result.isConfirmed) {
-                navigate("/dashboard/selectedClasses");
-              }
-            });
-          }
-        });
-    } else {
-      Swal.fire({
-        title: "Please Sign In First!!!",
-        text: "You are not signed in",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Go to Sign in Page",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/signIn");
-        }
-      });
-    }
-  };
-
   return (
-    <div className=" md:w-[1280px] mx-auto w-full bg-blue-100 rounded-xl ">
+    <div className=" md:w-[1280px] mt-[170px] mx-auto w-full bg-blue-100 rounded-xl ">
       <Helmet>
         <title>Inkwell | Classes</title>
       </Helmet>
-      <Title
-        topHeader={"All Classes"}
-        bottomTitle={
-          "Here are all the Classes/Courses available on this institute make sure to choose your faviourite one"
-        }
-      ></Title>
 
       <div className="md:p-10 p-3 grid md:grid-cols-3 grid-cols-1 gap-10">
         {/* card  */}
