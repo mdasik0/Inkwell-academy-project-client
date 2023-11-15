@@ -10,27 +10,11 @@ import "./Classes.css";
 
 const Classes = () => {
   const [classes, setclasses] = useState([]);
+  const [searchData, setSearchData] = useState([]);
   const [InputText, setInputText] = useState(false);
   const [clear, setClear] = useState(false);
   const { handleSelectedClass } = useEnroll();
-
   const inputValue = useRef();
-
-  const handleInput = (e) => {
-    e.preventDefault();
-    const todoInput = e.target.value;
-    if (todoInput) {
-      setInputText(true);
-    } else {
-      setInputText(false);
-    }
-  };
-  if (clear) {
-    inputValue.current.value = "";
-    setClear(false);
-    setInputText(false);
-  }
-
   useEffect(() => {
     axios
       .get(
@@ -43,9 +27,37 @@ const Classes = () => {
       )
       .then((data) => {
         setclasses(data?.data);
+        setSearchData(data?.data);
       });
   }, []);
   const [userData] = useUserRole();
+
+  const handleInput = (e) => {
+    e.preventDefault();
+    const todoInput = e.target.value;
+
+    if (todoInput) {
+      setInputText(true);
+    } else {
+      setInputText(false);
+    }
+
+    console.log(todoInput);
+    const NewData = classes.filter((c) =>
+      c.className.toLowerCase().includes(todoInput.toLowerCase())
+    );
+    if (searchData || todoInput) {
+      setSearchData(NewData);
+    } else {
+      setSearchData(classes)
+    }
+  };
+  if (clear) {
+    inputValue.current.value = "";
+    setClear(false);
+    setInputText(false);
+    setSearchData(classes)
+  }
 
   return (
     <div className=" md:w-[1280px] mt-[170px] mx-auto w-full  rounded-xl ">
@@ -78,7 +90,7 @@ const Classes = () => {
 
       <div className="md:p-10 p-3 grid md:grid-cols-3 grid-cols-1 gap-10">
         {/* card  */}
-        {classes.map((data) => (
+        {searchData.map((data) => (
           <div
             key={data._id}
             className={
