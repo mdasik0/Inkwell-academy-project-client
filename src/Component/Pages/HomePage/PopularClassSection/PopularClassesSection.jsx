@@ -1,5 +1,6 @@
 import { BsArrowRightShort } from "react-icons/bs";
 import ClassesSlider from "./ClassesSlider/ClassesSlider";
+import { Link } from "react-router-dom";
 const PopularClassesSection = () => {
   return (
     <div className=" p-6 flex md:flex-row flex-col justify-between items-center">
@@ -17,9 +18,9 @@ const PopularClassesSection = () => {
           your passion. Join our friendly community and start your learning
           journey today!
         </p>
-        <button className="bg-[#1eb2a6] hover:bg-gray-200 duration-300 hover:text-[#1eb2a6]  text-white pl-5 pr-3 py-2 rounded mt-8 flex items-center gap-1 font-semibold">
+        <Link to={"/classes"} className="bg-[#1eb2a6] w-fit hover:bg-gray-200 duration-300 hover:text-[#1eb2a6]  text-white pl-5 pr-3 py-2 rounded mt-8 flex items-center gap-1 font-semibold">
           See More <BsArrowRightShort className="text-2xl" />
-        </button>
+        </Link>
       </div>
       {/* classes */}
       <div className="md:w-1/3 w-full">

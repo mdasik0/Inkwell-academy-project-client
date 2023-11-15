@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import useEnroll from "../../../Hooks/useEnroll";
+import "./Classes.css"
 
 const Classes = () => {
   const [classes, setclasses] = useState([]);
@@ -26,7 +27,7 @@ const Classes = () => {
   const [userData] = useUserRole();
 
   return (
-    <div className=" md:w-[1280px] mt-[170px] mx-auto w-full bg-blue-100 rounded-xl ">
+    <div className=" md:w-[1280px] mt-[170px] mx-auto w-full  rounded-xl ">
       <Helmet>
         <title>Inkwell | Classes</title>
       </Helmet>
@@ -38,8 +39,8 @@ const Classes = () => {
             key={data._id}
             className={
               data.seats <= 0
-                ? `pointer-events-none h-[500px] rounded-xl shadow-xl w-full md:w-[350px]  bg-red-600`
-                : `h-[500px] rounded-xl shadow-xl w-full md:w-[350px] bg-white`
+                ? `pointer-events-none h-[500px] rounded-xl shadowCustomClass w-full md:w-[350px]  bg-red-600`
+                : `h-[500px] rounded-2xl shadowCustomClass w-full md:w-[350px] bg-white`
             }
           >
             <div className="h-[250px]">
@@ -93,10 +94,10 @@ const Classes = () => {
                   onClick={() => handleSelectedClass(data)}
                   className={
                     (userData === "admin" &&
-                      `btn-disabled bg-gray-500 flex items-start mt-3  text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150`) ||
+                      `btn-disabled bg-gray-500 flex items-start mt-3  text-white  rounded-full px-[32px] text-sm font-bold py-1 hover:bg-[#69fff2] duration-500 active:bg-blue-200 active:duration-150`) ||
                     (userData === "instructor" &&
-                      `btn-disabled flex bg-gray-500 items-start mt-3  text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150`) ||
-                    `flex items-start mt-3 bg-red-400 text-white hover:text-black rounded-full px-[32px] text-sm font-bold py-1 hover:bg-red-300 duration-500 active:bg-blue-200 active:duration-150`
+                      `btn-disabled flex bg-gray-500 items-start mt-3  text-white  rounded-full px-[32px] text-sm font-bold py-1 hover:bg-[#69fff2] duration-500 active:bg-blue-200 active:duration-150`) ||
+                    `flex items-start mt-3 bg-[#1eb2a6] text-white  rounded-full px-[32px] text-sm font-bold py-1 hover:bg-[#69fff2] duration-500 active:bg-blue-200 active:duration-150`
                   }
                 >
                   Enroll
