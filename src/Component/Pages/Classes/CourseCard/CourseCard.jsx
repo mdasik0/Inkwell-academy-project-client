@@ -20,7 +20,7 @@ const CourseCard = ({handleSelectedClass, userData, data}) => {
             <div className="h-[230px] flex flex-col justify-between px-4 w-full">
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-2xl Bebas_font">{data.className}</h1>
+                  <h1 title={(data.className).length > 35 && data.className} className="text-2xl Bebas_font ">{(data.className).length > 35 ? data.className.slice(0, 35) + " ..." : data.className }</h1>
                   <h4 className="text-sm text-stone-600">By {data.name}</h4>
                 </div>
               </div>
@@ -53,10 +53,10 @@ const CourseCard = ({handleSelectedClass, userData, data}) => {
                   onClick={() => handleSelectedClass(data)}
                   className={
                     (userData === "admin" &&
-                      `btn-disabled bg-gray-500 flex items-start mt-3  text-white  rounded-full px-[32px] text-sm font-bold py-1 hover:bg-[#69fff2] duration-500 active:bg-blue-200 active:duration-150`) ||
+                      `btn-disabled bg-gray-500 flex items-start mt-3  text-white  rounded px-3 text-sm font-bold py-3 hover:bg-[#69fff2] duration-500 active:bg-blue-200 active:duration-150`) ||
                     (userData === "instructor" &&
-                      `btn-disabled flex bg-gray-500 items-start mt-3  text-white  rounded-full px-[32px] text-sm font-bold py-1 hover:bg-[#69fff2] duration-500 active:bg-blue-200 active:duration-150`) ||
-                    `flex items-start mt-3 bg-[#1eb2a6] text-white  rounded-full px-[32px] text-sm font-bold py-1 hover:bg-[#69fff2] duration-500 active:bg-blue-200 active:duration-150`
+                      `btn-disabled flex bg-gray-500 items-start mt-3  text-white  rounded px-3 text-sm font-bold py-3 hover:bg-[#69fff2] duration-500 active:bg-blue-200 active:duration-150`) ||
+                    `flex items-start mt-3 bg-[#1eb2a6] text-white  rounded px-3 text-sm font-bold py-3 hover:bg-[#69fff2] duration-500 active:bg-blue-200 active:duration-150`
                   }
                 >
                   Enroll
