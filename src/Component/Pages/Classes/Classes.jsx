@@ -59,16 +59,16 @@ const Classes = () => {
   }
 
   return (
-    <div className=" md:w-[1280px] mt-[170px] mx-auto w-full  rounded-xl ">
+    <div className=" md:w-[1280px] lg:mt-[170px] mx-auto w-full  rounded-xl ">
       <Helmet>
         <title>Inkwell | Courses</title>
       </Helmet>
       <div style={{
         backgroundImage: ` url(https://images.unsplash.com/photo-1513738260158-30e559c10093?auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=1738)`,
         backgroundRepeat: "no-repeat",
-      }} className="bg-[#1eb2a6] h-[150px] flex justify-center items-center">
+      }} className="bg-[#1eb2a6] md:h-[150px] h-24 flex justify-center items-center">
         <>
-          <div className="bg-white px-3 py-2 border-2 flex items-center gap-2 rounded w-[500px] border-[#1eb2a6]">
+          <div className="bg-white px-3 py-2 border-2 flex items-center gap-2 rounded md:w-[500px] w-full mx-6 border-[#1eb2a6]">
             <LuSearch className="text-xl text-[#1eb2a6]" />
             <input
               type="text"
