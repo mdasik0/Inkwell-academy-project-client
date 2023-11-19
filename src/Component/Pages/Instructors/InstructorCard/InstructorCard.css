@@ -1,0 +1,6 @@
+.shadow-custom-instructor-image {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+.shadow-custom-instructor-card {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+}
