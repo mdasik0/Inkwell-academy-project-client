@@ -24,10 +24,12 @@ const Instructors = () => {
         <title>Inkwell | Instructors</title>
       </Helmet>
       
-      <div className="grid md:grid-cols-4 grid-cols-1 gap-14 mb-10">
-        <h1 className="text-5xl font-bold mb-16">Instructors</h1>
+        <h1 className="text-5xl font-bold mx-6 mt-10">Instructors</h1>
+      <div className="grid md:grid-cols-4 my-10 grid-cols-1 gap-14 mb-10">
         {/* card  */}
-        <InstructorCard />
+        {
+          instructors.map(instructor => <InstructorCard key={instructor._id} instructor={instructor} />)
+        }
       </div>
     </div>
   );
